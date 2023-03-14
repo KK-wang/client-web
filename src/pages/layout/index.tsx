@@ -1,6 +1,6 @@
 import { Menu, MenuProps } from "antd";
 import { Outlet, useNavigate } from "react-router";
-import { CloudServerOutlined, NodeIndexOutlined, DashboardOutlined, FunctionOutlined } from "@ant-design/icons"
+import { CloudServerOutlined, DeploymentUnitOutlined, ClusterOutlined, FunctionOutlined } from "@ant-design/icons"
 import styleNative from "./style.module.scss";
 import convert from "../../utils/proxy";
 import React from "react";
@@ -28,9 +28,9 @@ function Layout() {
   };
 
   const items: MenuItem[] = [
-    { label: "主页", key: 0, icon: <DashboardOutlined /> },
+    { label: "主页", key: 0, icon: <ClusterOutlined /> },
     { label: "Node 管理", key: 1, icon: <CloudServerOutlined /> },
-    { label: "Pod 管理", key: 2, icon: <NodeIndexOutlined /> },
+    { label: "Pod 管理", key: 2, icon: <DeploymentUnitOutlined /> },
     { label: "algorithm 管理", key: 3, icon: <FunctionOutlined /> },
   ]
 
