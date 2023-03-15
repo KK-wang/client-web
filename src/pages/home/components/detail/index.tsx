@@ -63,8 +63,17 @@ function Detail(prop: DetailProps) {
           <span className={`${style.spanValue} ${style.spanMark} ${style.info}`}>{info.business}</span>
         </li>
         <li>
-          <span className={style.spanKey}>Pod 运行情况</span>
+          <span className={style.spanKey}>Pod 运行情况</span> 
           <span>:</span>
+          {
+            Object.keys(info.pods).length === 0 ? 
+              null : 
+              <span className={style.spanValue}>
+                {
+                  Object.keys(info.pods).length === Object.keys(info.pods).reduce((pre, item) => info.pods[item].status ? pre : pre + 1, 0) ? <span className={`${style.spanMark} ${style.finish}`}>全部完成</span> : <span className={`${style.spanMark} ${style.running}`}>仍有 Pod 执行</span> 
+                }
+              </span>
+          }
           {
             Object.keys(info.pods).length === 0 ? 
               (prop.storeKey === "master" ? 
@@ -74,7 +83,7 @@ function Detail(prop: DetailProps) {
                 {
                   Object.keys(info.pods).map(item => 
                     <li key={item}>
-                      <span className={style.spanKey}>Pod 名称</span>
+                      <span className={style.spanKey} id={item}>Pod 名称</span>
                       <span>:</span>
                       <span className={`${style.spanValue} ${style.spanMark} ${style.info}`}>{item}</span> <img width={30} height={30} style={{position: "relative", top: "7.5px", marginLeft: "10px"}} src={pod} />
                       <ul>

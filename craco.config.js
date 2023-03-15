@@ -24,7 +24,11 @@ module.exports = {
           "process.env.API_SERVER_PORT": JSON.stringify(process.env.API_SERVER_PORT),
         })
       ],
-    }
+    },
+    configure: (config) => {
+      const ignoreWarnings = [/Failed to parse source map/];
+      return {...config, ignoreWarnings};
+    },
   },
   plugins: [
     {
