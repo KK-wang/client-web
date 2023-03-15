@@ -1,24 +1,51 @@
 .home-content {
   padding-right: 260px;
-}
+  padding-left: 1.5%;
+  padding-top: 40px;
+  padding-bottom: 40px;
 
-.anchor {
-  position: fixed;
-  right: 40px;
-  height: 100vh;
-  width: 220px;
-  text-overflow:ellipsis;
+  .card-extra {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-  :global {
-    .ant-anchor {
-      height: 100vh;
-      .ant-anchor-link-title {
-        color: #ffffff;
+  .anchor {
+    position: fixed;
+    right: 40px;
+    height: 100vh;
+    width: 220px;
+    text-overflow:ellipsis;
+  
+    :global {
+      .ant-anchor {
+        height: 100vh;
+        .ant-anchor-link-title {
+          color: #ffffff;
+        }
+      }
+      :where(.css-dev-only-do-not-override-1me4733).ant-anchor-wrapper:not(.ant-anchor-horizontal) .ant-anchor::before {
+        border-inline-start: 2px solid rgb(56, 62, 63);
+        height: calc(95.25% - 40px);
       }
     }
-    :where(.css-dev-only-do-not-override-1me4733).ant-anchor-wrapper:not(.ant-anchor-horizontal) .ant-anchor::before {
-      border-inline-start: 2px solid rgb(56, 62, 63);
-      height: 95.25%;
+  }
+  
+  .ant-card-container {
+    &:not(:last-of-type) {
+      margin-bottom: 20px;
+    }
+    :global {
+      .ant-card.ant-card-bordered {
+        background: transparent;
+        border: 1px solid #ffffff;
+        .ant-card-head {
+          border-bottom-color: #ffffff;
+          .ant-card-head-title {
+            color: #ffffff;
+          }
+        }
+      }
     }
   }
 }

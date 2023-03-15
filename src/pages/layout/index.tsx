@@ -4,9 +4,10 @@ import { CloudServerOutlined, DeploymentUnitOutlined, ClusterOutlined, FunctionO
 import styleNative from "./style.module.scss";
 import convert from "../../utils/proxy";
 import React from "react";
+import icon from "../../assets/img/icon.png";
 
 function Layout() {
-  const style = convert(styleNative);
+  const style = convert<typeof styleNative>(styleNative);
   type MenuItem = Required<MenuProps>['items'][number];
   const navigate = useNavigate();
 
@@ -38,7 +39,7 @@ function Layout() {
     <div className={style.layout}>
       <div className={style.menu}>
       <div className={style.icon}>
-        <img src={require("../../assets/img/icon.png")} alt="" />
+        <img src={icon} alt="" />
       </div>
         <Menu
           style={{height: "100%", paddingLeft: "10px", paddingRight: "10px"}}

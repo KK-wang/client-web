@@ -1,0 +1,42 @@
+.detail-wrapper {
+  color: #ffffff;
+
+  li {
+    &:first-child {
+      margin-top: 10px;
+    }
+    margin-bottom: 10px;
+  }
+
+  .span-mark {
+    display: inline-block;
+    border-radius: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+  .docker-image {
+    background-color: #c70efa;
+    cursor: pointer;
+  }
+  .finish {
+    background-color: #1677ff;
+  }
+  .error {
+    background-color: #d5150b;
+  }
+  .running {
+    background-color: #0ead4b;
+  }
+  .info {
+    background-color: #88888b;
+  }
+
+  .span-key {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+
+  .span-value {
+    margin-left: 10px;
+  }
+}

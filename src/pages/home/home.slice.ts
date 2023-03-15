@@ -2,14 +2,22 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getNodes } from "../../api/node";
 
 interface IHomeState {
-  getNodesApiData: {
-    [nodeName: string]: {
-      status: boolean,
-      pods: {
-        [podName: string]: {
-          image: string,
-          status: boolean,
-        }
+  [nodeName: string]: {
+    status: boolean,
+    ip: string,
+    cpu: string,
+    mem: string,
+    os: string,
+    role: string,
+    k8sVersion: string,
+    dockerVersion: string,
+    business: string,
+    pods: {
+      [podName: string]: {
+        image: string,
+        status: boolean,
+        githubUrl: string,
+        calcMetrics: string,
       }
     }
   }
@@ -38,4 +46,5 @@ const getNodesApi = createAsyncThunk("node/getNodes", async (_, { dispatch }) =>
 export {
   getNodesApi,
   home,
+  IHomeState,
 }

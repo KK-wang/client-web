@@ -27,7 +27,8 @@ const routesConfig: RouteObject[] = [
       {
         path: "/algorithm",
         element: <Algorithm />,
-      }
+      },
+      // TODO: 添加计算任务的介绍信息（例如镜像地址）。
     ]
   },
   {

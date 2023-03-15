@@ -1,19 +1,20 @@
 import styleNative from "./style.module.scss";
 import convert from "../../utils/proxy";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import React from "react";
 import { token } from "../../api";
 import { message } from "antd";
 import { AxiosResponse } from "axios";
 import { useNavigate } from "react-router";
+import icon from "../../assets/img/icon.png";
 
 export function Login() {
   // 需要注意的是，React 组件的名称应当以大写字母开头。
-  const style = convert(styleNative);
+  const style = convert<typeof styleNative>(styleNative);
   // FIXME: 修改默认值。
   const [username, setUsername] = useState<string>("csu_admin");
   const [password, setPassword] = useState<string>("8209190414");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   async function submit(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     e.preventDefault();
@@ -25,7 +26,7 @@ export function Login() {
   }
 
   return (
-    <div>
+    <Fragment>
       <div id={style.stars}></div>
       <div id={style.stars2}></div>
       <div id={style.stars3}></div>
@@ -54,9 +55,9 @@ export function Login() {
         </form>
       </div>
       <div className={style.icon}>
-        <img src={require("../../assets/img/icon.png")} alt="" />
+        <img src={icon} alt="" />
       </div>
-    </div>
+    </Fragment>
   );
 }
 
