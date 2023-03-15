@@ -14,13 +14,16 @@ import node from "../../assets/img/node.png";
 export const Context = createContext<IHomeState>({});
 
 function Home() {
-  useEffect(() => { loadClusterInfo() }, []);
-
   type AnchorItem = Required<AnchorProps>['items'][number];
   // 上面这个是 TS 拆解类型的语法，Required<AnchorProps>['items'] 表示获取 AnchorProps 类型中 items 属性的类型，但是由于其是一个数组，所以使用 [number] 来获取数组中元素的类型。
   const dispatch = useAppDispatch();
   const store = useAppSelector(state => state.home.getNodesApiData, shallowEqual);
   const storeKeys = Object.keys(store);
+  useEffect(() => {  
+    if (storeKeys.length === 0)
+      loadClusterInfo() 
+      // 数据已经存储到了 redux 中，直接取用就可以。 
+  }, []);
   const style = convert<typeof styleNative>(styleNative);
   const anchorItems: AnchorItem[] = [
     {
