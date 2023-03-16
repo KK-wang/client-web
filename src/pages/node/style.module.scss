@@ -4,6 +4,21 @@
   padding-top: 40px;
   padding-bottom: 40px;
 
+  .first-loading-skeleton {
+    :global {
+      .ant-skeleton.ant-skeleton-element.ant-skeleton-active {
+        width: 100%;
+        .ant-skeleton-image {
+          width: 100%;
+          height: 400px;
+        }
+      }
+    }
+    &:last-child {
+      margin-top: 30px;
+    }
+  }
+
   .anchor {
     position: fixed;
     right: 40px;
@@ -17,6 +32,9 @@
         .ant-anchor-link-title {
           color: #ffffff;
         }
+        .ant-anchor-link-active>.ant-anchor-link-title {
+          color: #1677ff;
+        }
       }
       :where(.css-dev-only-do-not-override-1me4733).ant-anchor-wrapper:not(.ant-anchor-horizontal) .ant-anchor::before {
         border-inline-start: 2px solid rgb(56, 62, 63);
@@ -26,11 +44,40 @@
   }
   
   .ant-card-container {
+    position: relative;
+    .extra-title {
+      position: absolute;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 16px;
+      right: 15px;
+      top: 7px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        margin-right: 10px;
+      }
+    }
+
+    .loading-skeleton {
+      :global {
+        .ant-skeleton.ant-skeleton-element.ant-skeleton-active {
+          width: 100%;
+          .ant-skeleton-image {
+            width: 100%;
+            height: 390px;
+          }
+        }
+      }
+    }
+
     &:not(:last-of-type) {
       margin-bottom: 20px;
     }
     :global {
       .ant-card.ant-card-bordered {
+        height: 500px;
         background: transparent;
         border: 1px solid #ffffff;
         .ant-card-head {
@@ -38,15 +85,45 @@
           .ant-card-head-title {
             color: #ffffff;
           }
+          .ant-card-head-wrapper .ant-card-extra {
+            padding: 0;
+            width: 100%;
+          }
+          .ant-tabs-tab.ant-tabs-tab-disabled {
+            opacity: 0.25;
+          }
         }
+
+        .ant-card-head {
+          .ant-tabs {
+            .ant-tabs-tab-btn {
+              color: #ffffff;
+            }
+            .ant-tabs-tab:not(.ant-tabs-tab-disabled) {
+              .ant-tabs-tab-btn {
+                cursor: pointer;
+              }
+            }
+            .ant-tabs-tab.ant-tabs-tab-active {
+              .ant-tabs-tab-btn {
+                display: inline-block;
+                border-radius: 5px;
+                padding-left: 3px;
+                padding-right: 3px;
+                background-color: #1677ff;
+              }
+            }
+          }
+        }
+        
       }
     }
   }
 
   .button-group {
-    position: absolute;
+    position: fixed;
     bottom: 40px;
-    right: 40px;
+    right: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;

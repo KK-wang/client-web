@@ -23,6 +23,9 @@
         .ant-anchor-link-title {
           color: #ffffff;
         }
+        .ant-anchor-link-active>.ant-anchor-link-title {
+          color: #1677ff;
+        }
       }
       :where(.css-dev-only-do-not-override-1me4733).ant-anchor-wrapper:not(.ant-anchor-horizontal) .ant-anchor::before {
         border-inline-start: 2px solid rgb(56, 62, 63);

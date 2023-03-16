@@ -50,5 +50,6 @@ const getAllNodesMetricsApi = createAsyncThunk("node/getAllNodesMetrics", async 
 export {
   node,
   getAllNodesMetricsApi,
-  setLoading
+  setLoading,
+  INodeState,
 }
