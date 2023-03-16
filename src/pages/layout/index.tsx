@@ -35,6 +35,15 @@ function Layout() {
     { label: "algorithm 管理", key: 3, icon: <FunctionOutlined /> },
   ]
 
+  function defaultSelectedKeys() {
+    switch (location.pathname) {
+      case "/": return ["0"];
+      case "/node": return ["1"];
+      case "/pod": return ["2"];
+      case "/algorithm": return ["3"];
+    }
+  }
+
   return (
     <div className={style.layout}>
       <div className={style.menu}>
@@ -43,7 +52,7 @@ function Layout() {
       </div>
         <Menu
           style={{height: "100%", paddingLeft: "10px", paddingRight: "10px"}}
-          defaultSelectedKeys={['0']}
+          defaultSelectedKeys={defaultSelectedKeys()}
           items={items}
           mode="inline"
           theme="dark"

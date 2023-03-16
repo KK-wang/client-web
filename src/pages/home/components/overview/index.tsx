@@ -5,7 +5,7 @@ import { Context } from "../..";
 import { getData } from './graph-data';
 import styleNative from "./style.module.scss";
 import convert from '../../../../utils/proxy';
-import { InfoCircleOutlined } from "@ant-design/icons"
+import { InfoCircleOutlined } from "@ant-design/icons";
 
 interface IEdgeConfig {
  id: string, // edge id
@@ -22,6 +22,8 @@ interface IEdgeConfig {
 function Overview() {
   const containerRef = useRef<HTMLDivElement>(null);
   let graphRef = useRef<Graph | null>(null);
+  // store 每改变一次，Overview 就会重新渲染一次，
+  // 为了不让 graph 重复地 new，出现多个 canvas，需要使用 ref。
   const store = useContext(Context);
   const storeKey = Object.keys(store);
   const data = getData(store);

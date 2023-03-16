@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { home } from '../pages/home/home.slice';
+import { node } from '../pages/node/node.slice';
 
 const store = configureStore({
   reducer: {
     home,
+    node,
   }
 });
 

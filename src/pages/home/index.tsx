@@ -41,11 +41,12 @@ function Home() {
   }
 
   const loadClusterInfo = (e?: any) => {
-    dispatch(getNodesApi()).then(() => e && message.success("已刷新集群状态"));
+    dispatch(getNodesApi()).
+      then(() => e && message.success("已重新获取集群状态"));
   };
 
   return (
-    <div className={style.homeContent}>
+    <div className={style.homeWrapper}>
       <div className={style.anchor}>
         <Anchor items={anchorItems}/>
       </div>

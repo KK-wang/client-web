@@ -1,14 +1,8 @@
-.home-wrapper {
+.node-wrapper {
   padding-right: 260px;
   padding-left: 1.5%;
   padding-top: 40px;
   padding-bottom: 40px;
-
-  .card-extra {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 
   .anchor {
     position: fixed;
@@ -45,6 +39,26 @@
             color: #ffffff;
           }
         }
+      }
+    }
+  }
+
+  .button-group {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .copy-btn {
+      margin-bottom: 20px;
+    }
+    
+    :global {
+      button:where(.css-dev-only-do-not-override-1me4733).ant-btn-primary:disabled {
+        color: rgba(255, 255, 255, 0.25);
       }
     }
   }
