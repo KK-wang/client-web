@@ -1,0 +1,18 @@
+.algorithm-wrapper {
+  position: relative;
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+  :global {
+    .ant-card.ant-card-bordered {
+      background: transparent;
+      border: 1px solid #ffffff;
+      .ant-card-head {
+        border-bottom-color: #ffffff;
+        .ant-card-head-title {
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}

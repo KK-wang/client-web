@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllNodesMetrics } from "../../api/node";
+import { getAllNodesMetrics } from "../../api";
 
 interface INodeState {
   [nodeName: string]: {

@@ -20,10 +20,10 @@ function Layout() {
         navigate("/node");
         break;
       case "2":
-        navigate("/pod");
+        navigate("/algorithm");
         break;
       case "3":
-        navigate("/algorithm");
+        navigate("/pod");
         break;
     }
   };
@@ -31,16 +31,17 @@ function Layout() {
   const items: MenuItem[] = [
     { label: "主页", key: 0, icon: <ClusterOutlined /> },
     { label: "Node 管理", key: 1, icon: <CloudServerOutlined /> },
-    { label: "Pod 管理", key: 2, icon: <DeploymentUnitOutlined /> },
-    { label: "algorithm 管理", key: 3, icon: <FunctionOutlined /> },
+    { label: "algorithm 管理", key: 2, icon: <FunctionOutlined /> },
+    { label: "Pod 管理", key: 3, icon: <DeploymentUnitOutlined /> },
+
   ]
 
   function defaultSelectedKeys() {
     switch (location.pathname) {
       case "/": return ["0"];
       case "/node": return ["1"];
-      case "/pod": return ["2"];
-      case "/algorithm": return ["3"];
+      case "/algorithm": return ["2"];
+      case "/pod": return ["3"];
     }
   }
 

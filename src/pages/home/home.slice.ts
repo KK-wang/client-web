@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getNodes } from "../../api/node";
+import { getNodes } from "../../api";
 
 interface IHomeState {
   [nodeName: string]: {
