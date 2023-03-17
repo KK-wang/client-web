@@ -65,7 +65,7 @@
     }
     :global {
       .ant-card.ant-card-bordered {
-        height: 500px;
+        min-height: 500px;
         background: transparent;
         border: 1px solid #ffffff;
         .ant-card-head {

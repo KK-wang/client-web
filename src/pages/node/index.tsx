@@ -71,7 +71,7 @@ function Node() {
   ];
 
   const cardContentList = (nodeName: string) => 
-    activeKeys[nodeName] === "json" ? <Json /> : 
+    activeKeys[nodeName] === "json" ? <Json nodeName={nodeName}/> : 
       <Chart tag={activeKeys[nodeName]} nodeName={nodeName}/>;
   
   return (
@@ -96,7 +96,7 @@ function Node() {
                 mem: store[key].availableMem.average,
               });
             }
-            navigator.clipboard.writeText(JSON.stringify(info)).
+            navigator.clipboard.writeText(JSON.stringify(info, null, 2)).
               then(() => message.success("已拷贝 Node 均值信息到剪切板"))
           }}
         >
