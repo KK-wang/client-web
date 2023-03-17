@@ -14,8 +14,6 @@ import { LineChart } from 'echarts/charts';
 import { UniversalTransition } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
 import getOption from "./chart-option";
-import styleNative from "./style.module.scss";
-import convert from "../../../../utils/proxy";
 
 echarts.use([
   TitleComponent,
@@ -33,23 +31,23 @@ function Chart(prop: { tag: string, nodeName: string }) {
   const chartsRef = useRef<echarts.EChartsType | null>(null);
   const store = useContext(Context);
   const { tag, nodeName } = prop;
-  // const info = nodeName === "node00" ? {
-  //   numsCPU: store["node00"].numsCPU,
-  //   idleCPU: store["node00"].idleCPU,
-    
-  // } : {
-
-  // };
-  const style = convert<typeof styleNative>(styleNative);
+  const info: typeof store = {};
+  if (nodeName === "node00") info["node00"] = store["node00"];
+  else {
+    for (const key of Object.keys(store)) {
+      if (key === "node00") continue;
+      info[key] = store[key];
+    }
+  }
   useEffect(() => {
     if (chartsRef.current === null) {
       chartsRef.current = echarts.init(ReactDOM.findDOMNode(containerRef.current) as HTMLElement, "dark");
     }
-    chartsRef.current.setOption(getOption(tag));
+    chartsRef.current.setOption(getOption(tag, info));
   }, [tag]);
   return (
-    <div className={style.chartWrapper}>
-      <div className={style.chart} ref={containerRef}></div>
+    <div style={{height: "400px", width: "100%"}}>
+      <div style={{height: "100%", width: "100%"}} ref={containerRef}></div>
     </div>
   );
 }

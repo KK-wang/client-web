@@ -4,7 +4,7 @@ import convert from "../../utils/proxy";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { shallowEqual } from "react-redux";
 import { useEffect, useState, createContext } from "react";
-import { getAllNodesMetricsApi, setLoading as _setLoading, INodeState } from "./node.slice";
+import { getAllNodesMetricsApi, setLoading, INodeState } from "./node.slice";
 import { ReloadOutlined, CopyOutlined, DotChartOutlined } from "@ant-design/icons";
 import { AlgorithmReqParam } from "../algorithm/algorithm.slice";
 import node from "../../assets/img/node.png";
@@ -45,31 +45,28 @@ function Node() {
 
 
   const loadNodeInfo = async () => {
-    setLoading(true);
+    dispatch(setLoading(true));
     await dispatch(getAllNodesMetricsApi());
+    setActiveKeys({
+      node00: "cpu",
+      others: "cpu",
+    });
     message.success("已获取 Node 信息");
-    setLoading(false);
+    dispatch(setLoading(false));
   };
-
-  const setLoading = (loading: boolean) => {
-    dispatch(_setLoading(loading));
-  }
 
   const tabList = [
     {
       key: "cpu",
       tab: "CPU 占用图表",
-      disabled: loading,
     },
     {
       key: "mem",
       tab: "内存占用图表",
-      disabled: loading,
     },
     {
       key: "json",
       tab: "JSON 数据",
-      disabled: loading,
     }
   ];
 
@@ -115,15 +112,16 @@ function Node() {
         </Button>
       </div>
       {
-        storeKeys.length === 0 ? ["", ""].map(_ => (
-          <div className={style.firstLoadingSkeleton}>
-            <Skeleton active title={false} paragraph={{rows: 3, width: "100%"}}/>
-            <Skeleton.Node active={true}>
-              <DotChartOutlined style={{ fontSize: 150, color: '#bfbfbf' }} />
-            </Skeleton.Node>
-          </div>
-          )) :
-          ["node00", "others"].map(item => (
+        ["node00", "others"].map(item => (
+          loading ? (
+            <div className={style.firstLoadingSkeleton} key={item}>
+              <Skeleton active title={false} paragraph={{rows: 3, width: "100%"}}/>
+              <Skeleton.Node active>
+                <DotChartOutlined style={{ fontSize: 150, color: '#bfbfbf' }} />
+              </Skeleton.Node>
+            </div>
+          ) : 
+          (
             <div className={style.antCardContainer} key={item}>
               <Card
                 tabList={tabList}
@@ -138,22 +136,14 @@ function Node() {
                 extra={
                   <div id={item} className={style.extraTitle}>
                     <img width={45} src={node} alt="" />
-                    <Skeleton active loading={loading} title={false} paragraph={{ rows: 1, width: "200px" }}>
-                      <span>{item === "node00" ? "node00 " : "其他节点" }的 CPU 及内存使用情况</span>
-                    </Skeleton>
+                    <span>{item === "node00" ? "node00 " : "其他节点" }的 CPU 及内存使用情况</span>
                   </div>}
               >
-                {
-                  loading ? <div className={style.loadingSkeleton}>
-                    <Skeleton.Node active={true}>
-                      <DotChartOutlined style={{ fontSize: 150, color: '#bfbfbf' }} />
-                    </Skeleton.Node>
-                  </div> : 
-                  <Context.Provider value={store}>{cardContentList(item)}</Context.Provider>
-                }
+                <Context.Provider value={store}>{cardContentList(item)}</Context.Provider>
               </Card>
             </div>
-          ))
+          )
+        ))
       }
     </div>
   );
