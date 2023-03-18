@@ -3,8 +3,116 @@
   padding-top: 40px;
   padding-bottom: 40px;
 
+  .form-wrapper {
+    position: relative;
+    width: 90%;
+    :global {
+      form {
+        .ant-form-item-label {
+          label {
+            position: relative;
+            color: #ffffff;
+            font-weight: bold;
+            width: 100px;
+            display: flex;
+            justify-content: flex-end;
+            right: 20px;
+          }
+        }
+        .ant-form-item-control {
+          .ant-select-selector {
+            background-color: transparent;
+            color: #ffffff;
+            .ant-select-selection-item {
+              color: #ffffff;
+            }
+            .ant-select-selection-placeholder {
+              color: rgba(255, 255, 255, 0.5);
+            }
+          }
+          .ant-select-arrow {
+            color: #ffffff;
+          }
+        }
+      }
+    }
+
+    .table-wrapper {
+      border-radius: 8px;
+      border: 1px solid #ffffff;
+      padding-left: 20px;
+      position: relative;
+      min-width: 600px;
+      width: auto;
+      table {
+        border-spacing: 3px;
+        th {
+          &::before {
+            display: none;
+          }
+          background-color: transparent;
+          color: #ffffff;
+          border: none;
+        }
+        td {
+          color: #ffffff;
+          border: none;
+        }
+      }
+      input {
+        background: transparent;
+        color: #ffffff;
+      }
+      :global {
+        .ant-table {
+          background-color: transparent;
+          .ant-table-row.ant-table-row-level-0 {
+            .ant-table-cell {
+              background: none !important;
+            }
+          }
+          .ant-checkbox-inner {
+            background-color: transparent;
+          }
+          .ant-checkbox-indeterminate .ant-checkbox-inner  {
+            background-color: #ffffff;
+          }
+          .ant-checkbox-checked .ant-checkbox-inner {
+            background-color: #1677ff;
+          }
+          .ant-input-group-addon {
+            color: #ffffff;
+            font-weight: bold;
+          }
+          .ant-input-group-wrapper-disabled {
+            .ant-input-group-addon {
+              opacity: 0.5;
+            }
+          }
+          .ant-input-disabled {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+    
+    .github-mark {
+      display: inline-block;
+      border-radius: 5px;
+      padding-left: 3px;
+      padding-right: 3px;
+      background-color: #c70efa;
+      cursor: pointer;
+      color: #ffffff;
+      font-weight: bold;
+    }
+  }
+
   :global {
     .ant-card.ant-card-bordered {
+      &:first-child {
+        margin-bottom: 20px;
+      }
       background: transparent;
       border: 1px solid #ffffff;
       .ant-card-head {
@@ -13,13 +121,34 @@
           color: #ffffff;
         }
       }
+      .ant-card-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 
   .extra-button-group {
     position: relative;
+    &>button:first-child {
+      margin-right: 20px;
+    }
     &>button:last-child {
       margin-left: 20px;
+    }
+  }
+}
+
+:global {
+  .ant-select-item.ant-select-item-option {
+    color: #ffffff;
+    &.ant-select-item-option-active {
+      background-color: #1677ff;
+    }
+    &.ant-select-item-option-selected {
+      background: rgb(50, 52, 59);
+      color: #1677ff;
     }
   }
 }

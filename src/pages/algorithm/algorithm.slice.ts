@@ -2,10 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createAlgorithmTask } from "../../api";
 
 interface IAlgorithmState {
+  // 存储算法的计算结果。
   nodeName: string,
   image: string,
   podName: string,
-  calcMetrics: string,
 }
 
 const algorithmSlice = createSlice({
@@ -43,15 +43,14 @@ export {
   algorithm,
   setAlgorithmInfo,
   createAlgorithmTaskApi,
+  saveAfterUpdated
 }
 
 namespace AlgorithmReqParam {
   export interface IAlgorithmReqParam {
     algorithm: Algorithm,
-    data: {
-      nodes: AlgorithmReqNode[],
-      tasks: AlgorithmReqTask[],
-    }
+    nodes: AlgorithmReqNode[],
+    tasks: AlgorithmReqTask[],
   }
 
   export interface AlgorithmReqNode {
@@ -64,6 +63,7 @@ namespace AlgorithmReqParam {
     podName: string,
     image: string,
     calcMetrics: string,
+    nums: number,
   }
 
   export type Algorithm = "BBO" | "GA";
