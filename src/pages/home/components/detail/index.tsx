@@ -6,12 +6,12 @@ import { Icon } from "@iconify/react";
 import pod from "../../../../assets/img/pod.png";
 
 interface DetailProps {
-  storeKey: string,
+  item: string,
 }
 
 function Detail(prop: DetailProps) {
-  const store = useContext(Context);
-  const info = store[prop.storeKey];
+  const getNodesApiData = useContext(Context);
+  const info = getNodesApiData[prop.item];
   const style = convert<typeof styleNative>(styleNative);
 
   return (
@@ -76,7 +76,7 @@ function Detail(prop: DetailProps) {
           }
           {
             Object.keys(info.pods).length === 0 ? 
-              (prop.storeKey === "master" ? 
+              (prop.item === "master" ? 
                 <span className={`${style.spanValue} ${style.spanMark} ${style.info}`}>Master 节点不承担运行 Pod 的职责</span> : 
                 <span className={`${style.spanValue} ${style.spanMark} ${style.info}`}>没有给该节点调度 Pod 计算任务</span>) : 
               <div><ul>

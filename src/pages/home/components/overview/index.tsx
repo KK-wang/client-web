@@ -24,9 +24,9 @@ function Overview() {
   let graphRef = useRef<Graph | null>(null);
   // store 每改变一次，Overview 就会重新渲染一次，
   // 为了不让 graph 重复地 new，出现多个 canvas，需要使用 ref。
-  const store = useContext(Context);
-  const storeKey = Object.keys(store);
-  const data = getData(store);
+  const getNodesApiData = useContext(Context);
+  const getNodesApiDataKey = Object.keys(getNodesApiData);
+  const data = getData(getNodesApiData);
   const style = convert<typeof styleNative>(styleNative);
   useEffect(() => {
     if (graphRef.current === null) {
@@ -35,7 +35,7 @@ function Overview() {
         layout: {
           type: 'force',
           preventOverlap: true,
-          linkDistance: (e: IEdgeConfig) => storeKey.includes(e.target.id) ? 150 : (e.source.id === "node00" ? 150 : 75),
+          linkDistance: (e: IEdgeConfig) => getNodesApiDataKey.includes(e.target.id) ? 150 : (e.source.id === "node00" ? 150 : 75),
           nodeStrength: -750
         },
         defaultNode: {
@@ -82,7 +82,7 @@ function Overview() {
     }
     graphRef.current.data(data);
     graphRef.current.render();
-  }, [store]);
+  }, [getNodesApiData]);
 
   return (
     <div className={style.overviewWrapper}>

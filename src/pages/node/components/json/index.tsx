@@ -10,17 +10,17 @@ import { message } from "antd";
 hljs.registerLanguage("json", json);
 
 function Json(prop: { nodeName: string }) {
-  const store = useContext(Context);
+  const getAllNodesMetricsData = useContext(Context);
   useEffect(() => {
     hljs.highlightAll();
   }, []);
 
-  const data: typeof store = {};
-  if (prop.nodeName === "node00") data["node00"] = store["node00"];
+  const data: typeof getAllNodesMetricsData = {};
+  if (prop.nodeName === "node00") data["node00"] = getAllNodesMetricsData["node00"];
   else {
-    for (const key of Object.keys(store)) {
+    for (const key of Object.keys(getAllNodesMetricsData)) {
       if (key === "node00") continue;
-      data[key] = store[key];
+      data[key] = getAllNodesMetricsData[key];
     }
   }
   return (

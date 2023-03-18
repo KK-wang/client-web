@@ -13,26 +13,23 @@ const algorithmSlice = createSlice({
   initialState: {
     algorithmRes: [] as IAlgorithmState[],
     formData: {} as AlgorithmReqParam.IAlgorithmReqParam,
+    isSavedAfterUpdated: true,
   },
   reducers: {
-    // TODO
     reset(state, action) {
       state.algorithmRes = action.payload;
     },
-    setAlgorithm(state, action) {
+    setAlgorithmInfo(state, action) {
       // 使用了 immer 库。
-      state.formData.algorithm = action.payload;
+      state.formData = action.payload;
     },
-    setTasks(state, action) {
-      state.formData.data.tasks = action.payload;
-    },
-    setNodes(state, action) {
-      state.formData.data.nodes = action.payload;
-    },
+    saveAfterUpdated(state, action) {
+      state.isSavedAfterUpdated = action.payload;
+    }
   }
 });
 
-const { reset, setAlgorithm, setTasks, setNodes } = algorithmSlice.actions;
+const { reset, setAlgorithmInfo, saveAfterUpdated } = algorithmSlice.actions;
 const algorithm = algorithmSlice.reducer;
 
 const createAlgorithmTaskApi = createAsyncThunk("algorithm/createAlgorithmTask", async (payload: AlgorithmReqParam.IAlgorithmReqParam, { dispatch }) => {
@@ -44,9 +41,7 @@ const createAlgorithmTaskApi = createAsyncThunk("algorithm/createAlgorithmTask",
 export {
   AlgorithmReqParam,
   algorithm,
-  setAlgorithm, 
-  setTasks, 
-  setNodes,
+  setAlgorithmInfo,
   createAlgorithmTaskApi,
 }
 

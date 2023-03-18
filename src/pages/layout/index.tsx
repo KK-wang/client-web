@@ -5,14 +5,23 @@ import styleNative from "./style.module.scss";
 import convert from "../../utils/proxy";
 import React from "react";
 import icon from "../../assets/img/icon.png";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
+import { Modal } from "antd";
+import { shallowEqual } from "react-redux";
 
 function Layout() {
   const style = convert<typeof styleNative>(styleNative);
   type MenuItem = Required<MenuProps>['items'][number];
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const isSavedAfterUpdated = useAppSelector(state => state.algorithm.isSavedAfterUpdated, shallowEqual);
 
   const handleClick = (param: { key: React.Key }) => {
-    switch (param.key) {
+    const key = isSavedAfterUpdated ? param.key : "-1";
+    switch (key) {
+      // TODO
+      case "-1": 
+        return;
       case "0":
         navigate("/");
         break;

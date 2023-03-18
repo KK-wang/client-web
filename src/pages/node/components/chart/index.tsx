@@ -29,14 +29,14 @@ echarts.use([
 function Chart(prop: { tag: string, nodeName: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const chartsRef = useRef<echarts.EChartsType | null>(null);
-  const store = useContext(Context);
+  const getAllNodesMetricsData = useContext(Context);
   const { tag, nodeName } = prop;
-  const info: typeof store = {};
-  if (nodeName === "node00") info["node00"] = store["node00"];
+  const info: typeof getAllNodesMetricsData = {};
+  if (nodeName === "node00") info["node00"] = getAllNodesMetricsData["node00"];
   else {
-    for (const key of Object.keys(store)) {
+    for (const key of Object.keys(getAllNodesMetricsData)) {
       if (key === "node00") continue;
-      info[key] = store[key];
+      info[key] = getAllNodesMetricsData[key];
     }
   }
   useEffect(() => {

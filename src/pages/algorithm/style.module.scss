@@ -15,4 +15,11 @@
       }
     }
   }
+
+  .extra-button-group {
+    position: relative;
+    &>button:last-child {
+      margin-left: 20px;
+    }
+  }
 }

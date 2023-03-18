@@ -17,15 +17,15 @@ function Node() {
   const style = convert<typeof styleNative>(styleNative);
   type AnchorItem = Required<AnchorProps>['items'][number];
   const dispatch = useAppDispatch();
-  const store = useAppSelector(state => state.node.getAllNodesMetricsData, shallowEqual);
+  const getAllNodesMetricsData = useAppSelector(state => state.node.getAllNodesMetricsData, shallowEqual);
   const loading = useAppSelector(state => state.node.loading, shallowEqual);
   const [activeKeys, setActiveKeys] = useState<{ [nodeName: string]: string }>({
     node00: "cpu",
     others: "cpu",
   });
-  const storeKeys = Object.keys(store);
+  const getAllNodesMetricsDataKeys = Object.keys(getAllNodesMetricsData);
   useEffect(() => {
-    if (storeKeys.length === 0) {
+    if (getAllNodesMetricsDataKeys.length === 0) {
       loadNodeInfo();
     }
   }, []);
@@ -89,11 +89,11 @@ function Node() {
           disabled={loading}
           onClick={() => {
             const info: AlgorithmReqParam.AlgorithmReqNode[] = [];
-            for (const key of storeKeys) {
+            for (const key of getAllNodesMetricsDataKeys) {
               info.push({
                 nodeName: key,
-                cpu: store[key].numsCPU * store[key].idleCPU.average,
-                mem: store[key].availableMem.average,
+                cpu: getAllNodesMetricsData[key].numsCPU * getAllNodesMetricsData[key].idleCPU.average,
+                mem: getAllNodesMetricsData[key].availableMem.average,
               });
             }
             navigator.clipboard.writeText(JSON.stringify(info, null, 2)).
@@ -139,7 +139,7 @@ function Node() {
                     <span>{item === "node00" ? "node00 " : "其他节点" }的 CPU 及内存使用情况</span>
                   </div>}
               >
-                <Context.Provider value={store}>{cardContentList(item)}</Context.Provider>
+                <Context.Provider value={getAllNodesMetricsData}>{cardContentList(item)}</Context.Provider>
               </Card>
             </div>
           )
