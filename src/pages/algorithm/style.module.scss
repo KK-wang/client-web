@@ -128,16 +128,6 @@
       }
     }
   }
-
-  .extra-button-group {
-    position: relative;
-    &>button:first-child {
-      margin-right: 20px;
-    }
-    &>button:last-child {
-      margin-left: 20px;
-    }
-  }
 }
 
 :global {

@@ -12,24 +12,15 @@ const algorithmSlice = createSlice({
   name: "algorithm",
   initialState: {
     algorithmRes: [] as IAlgorithmState[],
-    formData: {} as AlgorithmReqParam.IAlgorithmReqParam,
-    isSavedAfterUpdated: true,
   },
   reducers: {
     reset(state, action) {
       state.algorithmRes = action.payload;
     },
-    setAlgorithmInfo(state, action) {
-      // 使用了 immer 库。
-      state.formData = action.payload;
-    },
-    saveAfterUpdated(state, action) {
-      state.isSavedAfterUpdated = action.payload;
-    }
   }
 });
 
-const { reset, setAlgorithmInfo, saveAfterUpdated } = algorithmSlice.actions;
+const { reset } = algorithmSlice.actions;
 const algorithm = algorithmSlice.reducer;
 
 const createAlgorithmTaskApi = createAsyncThunk("algorithm/createAlgorithmTask", async (payload: AlgorithmReqParam.IAlgorithmReqParam, { dispatch }) => {
@@ -41,9 +32,7 @@ const createAlgorithmTaskApi = createAsyncThunk("algorithm/createAlgorithmTask",
 export {
   AlgorithmReqParam,
   algorithm,
-  setAlgorithmInfo,
   createAlgorithmTaskApi,
-  saveAfterUpdated
 }
 
 namespace AlgorithmReqParam {
@@ -54,17 +43,17 @@ namespace AlgorithmReqParam {
   }
 
   export interface AlgorithmReqNode {
-    nodeName: string,
-    cpu: number,
-    mem: number,
+    nodeName: string | null,
+    cpu: number | null,
+    mem: number | null,
   }
 
   export interface AlgorithmReqTask {
-    podName: string,
-    image: string,
-    calcMetrics: string,
-    nums: number,
+    podName: string | null,
+    image: string | null,
+    calcMetrics: string | null,
+    nums: number | null,
   }
 
-  export type Algorithm = "BBO" | "GA";
+  export type Algorithm = "BBO" | "GA" | null;
 }

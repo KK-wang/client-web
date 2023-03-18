@@ -2,21 +2,21 @@ const selectOptions = [{ value: "BBO", label: "BBO" }, { value: "GA", label: "GA
 
 const tableData: ITableData[] = [
   {
-    key: 1,
+    key: 0,
     image: "docker",
     calcMetrics: "2134",
     githubUrl: "https://github.com/KK-wang",
     isChecked: false,
   },
   {
-    key: 2,
+    key: 1,
     image: "kubernates",
     calcMetrics: "3192",
     githubUrl: "https://github.com/KK-wang",
     isChecked: false,
   },
   {
-    key: 3,
+    key: 2,
     image: "nginx",
     calcMetrics: "1023",
     githubUrl: "https://github.com/KK-wang",
