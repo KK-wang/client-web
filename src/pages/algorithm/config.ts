@@ -1,4 +1,4 @@
-const selectOptions = [{ value: "BBO", label: "BBO" }, { value: "GA", label: "GA" }];
+const selectOptions = [{ value: "BBO", label: "BBO" }];
 
 const tableData: ITableData[] = [
   {

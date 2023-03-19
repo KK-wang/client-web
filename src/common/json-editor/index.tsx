@@ -6,13 +6,16 @@ import "ace-builds/src-noconflict/mode-json";
 import "ace-builds/src-noconflict/theme-monokai";
 import 'ace-builds/src-noconflict/ace';
 
-function JsonEditor(prop: { onChange?: (value: string, event?: any) => void }) {
+function JsonEditor(prop: {
+  placeholder?: string,
+  onChange?: (value: string, event?: any) => void,
+}) {
   const style = convert<typeof styleNative>(styleNative);
 
   return (
     <div className={style.jsonEditorContainer}>
       <AceEditor
-        placeholder="输入 Node 资源使用信息的 JSON 格式..."
+        placeholder={prop.placeholder}
         mode="json"
         theme="monokai"
         fontSize={18}

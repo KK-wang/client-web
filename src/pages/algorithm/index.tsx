@@ -1,13 +1,14 @@
 import convert from "../../utils/proxy";
-import { Card, Form, Button, Select, Table, Input, Popover } from "antd";
+import { Card, Form, Button, Select, Table, Input, Popover, message } from "antd";
 import styleNative from "./style.module.scss";
-import { CloudUploadOutlined, CopyOutlined, GithubOutlined, InfoCircleOutlined, FormOutlined } from "@ant-design/icons";
+import { CloudUploadOutlined, CopyOutlined, GithubOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { shallowEqual } from "react-redux";
 import { createAlgorithmTaskApi, AlgorithmReqParam } from "./algorithm.slice"; 
 import { selectOptions, tableData, ITableData } from "./config";
 import { useRef, useState } from "react";
 import JsonEditor from "../../common/json-editor";
+import { algorithmReqParamValidator as validator } from "../../utils/json-validator";
 
 function Algorithm() {
   // TODO 数据备份功能。
@@ -15,34 +16,33 @@ function Algorithm() {
   const dispatch = useAppDispatch();
   const algorithmRes = useAppSelector(state => state.algorithm.algorithmRes, shallowEqual);
   const [dataSource, setDataSource] = useState(tableData);
-  const formDataRef = useRef<AlgorithmReqParam.IAlgorithmReqParam>({} as AlgorithmReqParam.IAlgorithmReqParam);
+  const formDataRef = useRef<AlgorithmReqParam.IAlgorithmReqParam>({
+    algorithm: null,
+    tasks: [],
+    nodes: [],
+  } as AlgorithmReqParam.IAlgorithmReqParam);
+  const nodesInfoRef = useRef<string>();
 
   return (
     <div className={style.algorithmWrapper}>
       <Card 
-        title={<Popover placement="right" content={<div style={{maxWidth: "120px"}}>配置信息将会自动保存</div>}><span style={{cursor: "default"}}>算法配置信息<InfoCircleOutlined style={{marginLeft: "10px"}}/></span></Popover>}
+        title={<Popover placement="right" content={<div>注意，页面跳转后已填写的配置信息将丢失</div>}><span style={{cursor: "default"}}>算法配置信息<InfoCircleOutlined style={{marginLeft: "10px"}}/></span></Popover>}
         extra={
-        <div className={style.extraButtonGroup}>
-          <Button
-            type="primary" 
-            shape="round" 
-            icon={<FormOutlined />} 
-            size="middle" 
-            // onClick={() => dispatch(createAlgorithmTaskApi(formDataRef.current))}>
-            onClick={() => console.log(formDataRef)}>
-              重置算法信息
-          </Button>
           <Button
             type="primary" 
             shape="round" 
             icon={<CloudUploadOutlined />} 
             size="middle" 
-            // onClick={() => dispatch(createAlgorithmTaskApi(formDataRef.current))}>
-            onClick={() => console.log(formDataRef)}>
+            onClick={() => {
+              try { formDataRef.current.nodes = JSON.parse(nodesInfoRef.current!) }
+              catch { message.error("Node 信息的值含有 JSON 语法错误"); return; }
+              if (validator(formDataRef.current)) {
+                dispatch(createAlgorithmTaskApi(formDataRef.current));
+              } else message.error("请完善算法配置信息且保证 Node 信息的值符合给定的 JSON schema");
+            }}>
               执行算法
           </Button>
-        </div>
-}>
+        }>
         <div className={style.formWrapper}>
           <Form>
             <Form.Item label="算法">
@@ -129,7 +129,17 @@ function Algorithm() {
               </div>
             </Form.Item>
             <Form.Item label="Node 信息">
-              <JsonEditor />
+              <JsonEditor onChange={val => {
+                nodesInfoRef.current = val;
+              }} placeholder={`
+请输入 JSON 格式的 Node 资源使用信息。
+JSON schema 如下: 
+{
+  "nodeName": string,
+  "cpu": number,
+  "mem": number
+}[]
+              `}/>
             </Form.Item>
           </Form>
         </div>
