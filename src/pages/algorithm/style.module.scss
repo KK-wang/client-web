@@ -2,6 +2,8 @@
   position: relative;
   padding-top: 40px;
   padding-bottom: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
 
   .form-wrapper {
     position: relative;
@@ -125,6 +127,48 @@
         display: flex;
         justify-content: center;
         align-items: center;
+      }
+    }
+  }
+
+  .mac-code-block-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .content-info, .content-loading, .content-json {
+      position: relative;
+      min-height: 400px;
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+
+    .content-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      :global {
+        .ant-result-icon {
+          span {
+            color: #aeb3ba;
+          }
+        }
+        .ant-result-title {
+          color: #aeb3ba;
+        }
+      }
+    }
+
+    .content-loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      :global {
+        .ant-result-title {
+          color: #ffffff;
+        }
       }
     }
   }

@@ -38,7 +38,7 @@ function Json(prop: { nodeName: string }) {
           then(() => message.success("已拷贝 Node 均值信息到剪切板"))}
         ><CopyOutlined/></div>
         <pre>
-          <code style={{ fontFamily: "ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace" }}>
+          <code className="language-json" style={{ fontFamily: "ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace" }}>
             {
               JSON.stringify(data, null, 2)
             }

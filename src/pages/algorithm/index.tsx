@@ -1,20 +1,23 @@
 import convert from "../../utils/proxy";
-import { Card, Form, Button, Select, Table, Input, Popover, message } from "antd";
+import { Card, Form, Button, Select, Table, Input, Popover, message, Result } from "antd";
 import styleNative from "./style.module.scss";
-import { CloudUploadOutlined, CopyOutlined, GithubOutlined, InfoCircleOutlined } from "@ant-design/icons";
+import { CloudUploadOutlined, CopyOutlined, GithubOutlined, InfoCircleOutlined, LoadingOutlined } from "@ant-design/icons";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { shallowEqual } from "react-redux";
-import { createAlgorithmTaskApi, AlgorithmReqParam } from "./algorithm.slice"; 
+import { createAlgorithmTaskApi, AlgorithmReqParam, setCalculating } from "./algorithm.slice"; 
 import { selectOptions, tableData, ITableData } from "./config";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import JsonEditor from "../../common/json-editor";
 import { algorithmReqParamValidator as validator } from "../../utils/json-validator";
+import MacCodeBlock from "../../common/mac-code-block";
+import AlgorithmResult from "./algorithm-result";
+
 
 function Algorithm() {
-  // TODO 数据备份功能。
   const style = convert<typeof styleNative>(styleNative);
   const dispatch = useAppDispatch();
   const algorithmRes = useAppSelector(state => state.algorithm.algorithmRes, shallowEqual);
+  const isCalculating = useAppSelector(state => state.algorithm.isCalculating, shallowEqual);
   const [dataSource, setDataSource] = useState(tableData);
   const formDataRef = useRef<AlgorithmReqParam.IAlgorithmReqParam>({
     algorithm: null,
@@ -22,6 +25,10 @@ function Algorithm() {
     nodes: [],
   } as AlgorithmReqParam.IAlgorithmReqParam);
   const nodesInfoRef = useRef<string>();
+    
+  useEffect(() => () => {
+    for (const row of tableData) row.isChecked = false;
+  }, []);
 
   return (
     <div className={style.algorithmWrapper}>
@@ -33,11 +40,15 @@ function Algorithm() {
             shape="round" 
             icon={<CloudUploadOutlined />} 
             size="middle" 
-            onClick={() => {
+            onClick={async () => {
               try { formDataRef.current.nodes = JSON.parse(nodesInfoRef.current!) }
               catch { message.error("Node 信息的值含有 JSON 语法错误"); return; }
               if (validator(formDataRef.current)) {
-                dispatch(createAlgorithmTaskApi(formDataRef.current));
+                dispatch(setCalculating(true));
+                message.success("算法任务已被提交");
+                await dispatch(createAlgorithmTaskApi(formDataRef.current));
+                dispatch(setCalculating(false));
+                message.success("算法任务执行完毕");
               } else message.error("请完善算法配置信息且保证 Node 信息的值符合给定的 JSON schema");
             }}>
               执行算法
@@ -151,7 +162,21 @@ JSON schema 如下:
             复制算法执行结果
           </Button>
         }>
-
+        <div className={style.macCodeBlockWrapper}>
+          <MacCodeBlock>
+            {
+              isCalculating ? (
+                <div className={style.contentLoading}>
+                  <Result icon={<LoadingOutlined />} title="算法任务进行中，请稍后..."/>
+                </div>
+              ) : algorithmRes.length === 0 ? (
+                <div className={style.contentInfo}>
+                  <Result status="info" title="暂无算法任务被提交执行"/>
+                </div>
+              ) : <AlgorithmResult algorithmRes={algorithmRes} />
+            }
+          </MacCodeBlock>
+        </div>
       </Card>
     </div>
   );

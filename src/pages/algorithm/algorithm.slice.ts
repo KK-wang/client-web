@@ -12,15 +12,19 @@ const algorithmSlice = createSlice({
   name: "algorithm",
   initialState: {
     algorithmRes: [] as IAlgorithmState[],
+    isCalculating: false,
   },
   reducers: {
     reset(state, action) {
       state.algorithmRes = action.payload;
     },
+    setCalculating(state, action) {
+      state.isCalculating = action.payload;
+    }
   }
 });
 
-const { reset } = algorithmSlice.actions;
+const { reset, setCalculating } = algorithmSlice.actions;
 const algorithm = algorithmSlice.reducer;
 
 const createAlgorithmTaskApi = createAsyncThunk("algorithm/createAlgorithmTask", async (payload: AlgorithmReqParam.IAlgorithmReqParam, { dispatch }) => {
@@ -33,6 +37,8 @@ export {
   AlgorithmReqParam,
   algorithm,
   createAlgorithmTaskApi,
+  setCalculating,
+  IAlgorithmState,
 }
 
 namespace AlgorithmReqParam {
