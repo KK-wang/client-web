@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { Context } from "../..";
 import styleNative from "./style.module.scss"
 import convert from "../../../../utils/proxy";
-import { Icon } from "@iconify/react";
 import pod from "../../../../assets/img/pod.png";
+import { GithubOutlined } from "@ant-design/icons";
 
 interface DetailProps {
   item: string,
@@ -90,7 +90,7 @@ function Detail(prop: DetailProps) {
                         <li>
                           <span className={style.spanKey}>Docker 镜像</span>
                           <span>:</span>
-                          <span className={`${style.spanValue} ${style.spanMark} ${style.dockerImage}`} style={{ fontWeight: "bold" }} onClick={() => window.open(info.pods[item].githubUrl, "target")}><Icon icon="ant-design:github-outlined" /> {info.pods[item].image}</span>
+                          <span className={`${style.spanValue} ${style.spanMark} ${style.dockerImage}`} style={{ fontWeight: "bold" }} onClick={() => window.open(info.pods[item].githubUrl, "target")}><GithubOutlined /> {info.pods[item].image}</span>
                         </li>
                         <li>
                           <span className={style.spanKey}>状态</span>

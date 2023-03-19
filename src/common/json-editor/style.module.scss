@@ -1,0 +1,19 @@
+.json-editor-container {
+  position: relative;
+  :global {
+    .ace_scrollbar.ace_scrollbar-v {
+      overflow-y: auto;
+      &::-webkit-scrollbar {
+        width: 15px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #808080;      
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #c3c0c0;
+      }
+    }
+  }
+}

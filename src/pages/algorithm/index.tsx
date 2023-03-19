@@ -1,14 +1,16 @@
 import convert from "../../utils/proxy";
 import { Card, Form, Button, Select, Table, Input, Popover } from "antd";
 import styleNative from "./style.module.scss";
-import { CloudUploadOutlined, CopyOutlined, GithubOutlined, InfoCircleOutlined } from "@ant-design/icons";
+import { CloudUploadOutlined, CopyOutlined, GithubOutlined, InfoCircleOutlined, FormOutlined } from "@ant-design/icons";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { shallowEqual } from "react-redux";
 import { createAlgorithmTaskApi, AlgorithmReqParam } from "./algorithm.slice"; 
 import { selectOptions, tableData, ITableData } from "./config";
 import { useRef, useState } from "react";
+import JsonEditor from "../../common/json-editor";
 
 function Algorithm() {
+  // TODO 数据备份功能。
   const style = convert<typeof styleNative>(styleNative);
   const dispatch = useAppDispatch();
   const algorithmRes = useAppSelector(state => state.algorithm.algorithmRes, shallowEqual);
@@ -18,19 +20,32 @@ function Algorithm() {
   return (
     <div className={style.algorithmWrapper}>
       <Card 
-        title="算法配置信息"
-        extra={<Button 
-                type="primary" 
-                shape="round" 
-                icon={<CloudUploadOutlined />} 
-                size="middle" 
-                // onClick={() => dispatch(createAlgorithmTaskApi(formDataRef.current))}>
-                onClick={() => console.log(formDataRef)}>
-                执行算法
-              </Button>}>
+        title={<Popover placement="right" content={<div style={{maxWidth: "120px"}}>配置信息将会自动保存</div>}><span style={{cursor: "default"}}>算法配置信息<InfoCircleOutlined style={{marginLeft: "10px"}}/></span></Popover>}
+        extra={
+        <div className={style.extraButtonGroup}>
+          <Button
+            type="primary" 
+            shape="round" 
+            icon={<FormOutlined />} 
+            size="middle" 
+            // onClick={() => dispatch(createAlgorithmTaskApi(formDataRef.current))}>
+            onClick={() => console.log(formDataRef)}>
+              重置算法信息
+          </Button>
+          <Button
+            type="primary" 
+            shape="round" 
+            icon={<CloudUploadOutlined />} 
+            size="middle" 
+            // onClick={() => dispatch(createAlgorithmTaskApi(formDataRef.current))}>
+            onClick={() => console.log(formDataRef)}>
+              执行算法
+          </Button>
+        </div>
+}>
         <div className={style.formWrapper}>
           <Form>
-            <Form.Item name="algorithm" label="算法">
+            <Form.Item label="算法">
               <Select
                 showSearch
                 placeholder="请选择要使用的算法"
@@ -45,9 +60,7 @@ function Algorithm() {
                 dropdownStyle={{ background: "rgb(50, 52, 59)" }}
               />
             </Form.Item>
-            <Form.Item
-              label="计算任务"
-            >
+            <Form.Item label="计算任务">
               <div className={style.tableWrapper}>
                 <Table
                   pagination={false}
@@ -114,6 +127,9 @@ function Algorithm() {
                   }}
                 />
               </div>
+            </Form.Item>
+            <Form.Item label="Node 信息">
+              <JsonEditor />
             </Form.Item>
           </Form>
         </div>
