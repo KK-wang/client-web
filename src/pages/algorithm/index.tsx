@@ -37,7 +37,6 @@ function Algorithm() {
         extra={
           <Button
             type="primary" 
-            shape="round" 
             icon={<CloudUploadOutlined />} 
             size="middle" 
             onClick={async () => {
@@ -158,7 +157,7 @@ JSON schema 如下:
       <Card 
         title="算法执行结果"
         extra={
-          <Button type="primary" shape="round" icon={<CopyOutlined />} size="middle">
+          <Button type="primary" icon={<CopyOutlined />} size="middle">
             复制算法执行结果
           </Button>
         }>
@@ -167,7 +166,7 @@ JSON schema 如下:
             {
               isCalculating ? (
                 <div className={style.contentLoading}>
-                  <Result icon={<LoadingOutlined />} title="算法任务进行中，请稍后..."/>
+                  <Result icon={<LoadingOutlined />} title="算法任务执行中，请稍后..."/>
                 </div>
               ) : algorithmRes.length === 0 ? (
                 <div className={style.contentInfo}>

@@ -60,7 +60,7 @@ function Home() {
                     <Card title="边缘计算平台集群概览" 
                       extra={
                         <Popover content={<div style={{maxWidth: "150px"}}>重新获取集群及集群中各个节点和 pod 的信息</div>} placement="left">
-                          <Button type="primary" shape="round" icon={<ReloadOutlined />} size="middle" onClick={(e) => loadClusterInfo(e)}>
+                          <Button type="primary" icon={<ReloadOutlined />} size="middle" onClick={(e) => loadClusterInfo(e)}>
                             刷新集群状态
                           </Button>
                         </Popover>

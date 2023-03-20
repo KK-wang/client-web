@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { shallowEqual } from "react-redux";
 import { useEffect, useState, createContext } from "react";
 import { getAllNodesMetricsApi, setLoading, INodeState } from "./node.slice";
-import { ReloadOutlined, CopyOutlined, LineChartOutlined } from "@ant-design/icons";
+import { ReloadOutlined, CopyOutlined, AreaChartOutlined } from "@ant-design/icons";
 import { AlgorithmReqParam } from "../algorithm/algorithm.slice";
 import node from "../../assets/img/node.png";
 import Chart from "./components/chart";
@@ -117,7 +117,7 @@ function Node() {
             <div className={style.firstLoadingSkeleton} key={item}>
               <Skeleton active title={false} paragraph={{rows: 3, width: "100%"}}/>
               <Skeleton.Node active>
-                <LineChartOutlined style={{ fontSize: 150, color: '#bfbfbf' }} />
+                <AreaChartOutlined style={{ fontSize: 150, color: '#bfbfbf' }} />
               </Skeleton.Node>
             </div>
           ) : 
