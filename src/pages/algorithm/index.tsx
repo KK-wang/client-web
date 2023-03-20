@@ -95,11 +95,15 @@ function Algorithm() {
                       align: "center",
                       title: () => <Popover content={<div style={{maxWidth: "120px"}}>仅限整数，最小值为 1，最大值为 99</div>}><span style={{cursor: "default"}}>创建数量<InfoCircleOutlined style={{marginLeft: "10px"}}/></span></Popover>,
                       dataIndex: "nums",
-                      render: (_, record: ITableData) => <Input disabled={!record.isChecked} style={{ width: "60px", textAlign: "center" }} maxLength={2} onChange={e => {
+                      render: (_, record: ITableData) => <Input value={record.nums === null ? "" : record.nums} disabled={!record.isChecked} style={{ width: "60px", textAlign: "center" }} maxLength={2} onChange={e => {
+                        for (const row of dataSource)
+                          if (row.image === record.image) 
+                            row.nums = parseInt(e.target.value);
                         const tasks = formDataRef.current.tasks;
                         for (const task of tasks) 
                           if (task.image === record.image) 
                             task.nums = parseInt(e.target.value);
+                        setDataSource([...dataSource])
                       }}/>
                     },
                     {
@@ -107,11 +111,15 @@ function Algorithm() {
                       title: () => <Popover content={<div style={{maxWidth: "200px"}}>后台会自动将 podName 编号以保证 podName 的唯一性</div>}><span style={{cursor: "default"}}>pod 名称<InfoCircleOutlined style={{marginLeft: "10px"}}/></span></Popover>,
                       dataIndex: "podName",
                       render(_, record: ITableData) {
-                        return <Input disabled={!record.isChecked} style={{ width: "auto", minWidth: "150px", textAlign: "center" }} addonBefore={`${record.image}-`} addonAfter="-{i}" onChange={e => {
+                        return <Input value={record.podName === null ? "" : record.podName} disabled={!record.isChecked} style={{ width: "auto", minWidth: "150px", textAlign: "center" }} addonBefore={`${record.image}-`} addonAfter="-{i}" onChange={e => {
+                          for (const row of dataSource)
+                            if (row.image === record.image) 
+                              row.podName = e.target.value;
                           const tasks = formDataRef.current.tasks;
                           for (const task of tasks) 
                             if (task.image === record.image)
                               task.podName = `${record.image}-${e.target.value}-{i}`;
+                          setDataSource([...dataSource])
                         }}/>;
                       }
                     },
@@ -126,10 +134,14 @@ function Algorithm() {
                           tasks.push({
                             image: dataSource[row.key].image,
                             calcMetrics: dataSource[row.key].calcMetrics,
-                            podName: null,
-                            nums: null,
+                            podName: dataSource[row.key].podName,
+                            nums: dataSource[row.key].nums,
                           });
-                        } else row.isChecked = false;
+                        } else {
+                          row.isChecked = false;
+                          row.nums = null;
+                          row.podName = null;
+                        }
                       }
                       formDataRef.current.tasks = tasks;
                       setDataSource([...dataSource]);
