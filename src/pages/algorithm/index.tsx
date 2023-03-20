@@ -113,7 +113,7 @@ function Algorithm() {
                       render(_, record: ITableData) {
                         return <Input value={record.podName === null ? "" : record.podName} disabled={!record.isChecked} style={{ width: "auto", minWidth: "150px", textAlign: "center" }} addonBefore={`${record.image}-`} addonAfter="-{i}" onChange={e => {
                           for (const row of dataSource)
-                            if (row.image === record.image) 
+                            if (row.image === record.image)
                               row.podName = e.target.value;
                           const tasks = formDataRef.current.tasks;
                           for (const task of tasks) 

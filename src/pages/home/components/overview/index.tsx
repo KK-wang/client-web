@@ -21,7 +21,7 @@ interface IEdgeConfig {
 
 function Overview() {
   const containerRef = useRef<HTMLDivElement>(null);
-  let graphRef = useRef<Graph | null>(null);
+  const graphRef = useRef<Graph | null>(null);
   // store 每改变一次，Overview 就会重新渲染一次，
   // 为了不让 graph 重复地 new，出现多个 canvas，需要使用 ref。
   const getNodesApiData = useContext(Context);
@@ -60,22 +60,22 @@ function Overview() {
         e.item!.get('model').fx = null;
         e.item!.get('model').fy = null;
       });
-      graphRef.current.on('node:mouseleave', (e) => {
+      graphRef.current.on('node:mouseleave', () => {
         const canvas = containerRef.current?.childNodes[0] as HTMLCanvasElement;
         canvas.style.cursor = "grab";
       });
       graphRef.current.on('node:dblclick', (e) => {
         window.location.href = `#${e.item?._cfg!.id}`;
       });
-      graphRef.current.on('canvas:mouseenter', (e) => {
+      graphRef.current.on('canvas:mouseenter', () => {
         const canvas = containerRef.current?.childNodes[0] as HTMLCanvasElement;
         canvas.style.cursor = "grab";
       });
-      graphRef.current.on('canvas:mousedown', (e) => {
+      graphRef.current.on('canvas:mousedown', () => {
         const canvas = containerRef.current?.childNodes[0] as HTMLCanvasElement;
         canvas.style.cursor = "grabbing";
       });
-      graphRef.current.on('canvas:mouseup', (e) => {
+      graphRef.current.on('canvas:mouseup', () => {
         const canvas = containerRef.current?.childNodes[0] as HTMLCanvasElement;
         canvas.style.cursor = "grab";
       });

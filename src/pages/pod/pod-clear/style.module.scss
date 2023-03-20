@@ -1,4 +1,108 @@
 .pod-clear-wrapper {
   position: relative;
-  
+
+  .card-title {
+    position: relative;
+  }
+
+  .extra-button-group {
+    position: relative;
+    button:first-child {
+      margin-right: 20px;
+    }
+  }
+
+  .span-mark {
+    display: inline-block;
+    border-radius: 5px;
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+  .finish {
+    background-color: #1677ff;
+  }
+  .running {
+    background-color: #0ead4b;
+  }
+  .info {
+    background-color: #88888b;
+  }
+
+  .container {
+    width: 100%;
+    height: 550px;
+
+    :global {
+      .g6-component-tooltip {
+        all: unset;
+        height: auto;
+        width: auto;
+        border: 3px solid #ffffff;
+        background-color: #4e5576;
+        padding: 10px;
+        padding-right: 20px;
+        border-radius: 10px;
+        div {
+          color: #ffffff;
+          ul {
+            li:not(:last-child) {
+              margin-bottom: 10px;
+            }
+          }
+          .pod-name {
+            font-size: 20px;
+            font-weight: bold;
+          }
+          .span-mark {
+            display: inline-block;
+            border-radius: 5px;
+            padding-left: 3px;
+            padding-right: 3px;
+          }
+          .finish {
+            background-color: #1677ff;
+          }
+          .running {
+            background-color: #0ead4b;
+          }
+          .docker-image {
+            background-color: #c70efa;
+          }
+          .info {
+            background-color: #88888b;
+          }
+        
+          .span-key {
+            margin-right: 10px;
+            font-weight: bold;
+          }
+        
+          .span-value {
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+
+    canvas {
+      width: 100%;
+    }
+  }
+}
+
+:global {
+  .ant-popover-inner {
+    .ant-popover-inner-content {
+      .ant-popconfirm-inner-content {
+        .ant-popconfirm-buttons {
+          display: flex;
+          justify-content: center;
+      
+          button {
+            width: 100px;
+          }
+        }
+      }
+    }
+  }
 }
