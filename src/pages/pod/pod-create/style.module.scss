@@ -1,3 +1,55 @@
 .pod-create-wrapper {
   position: relative;
+
+  .mac-code-block-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .json-editor-wrapper {
+      position: relative;
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+  }
+}
+
+:global {
+  .ant-modal-root {
+    .create-pod-info-modal {
+      .create-pod-info-modal-li:not(:last-child) {
+        margin-bottom: 10px;
+      }
+
+      position: relative;
+      .span-mark {
+        position: relative;
+        top: 2.5px;
+        display: inline-block;
+        border-radius: 5px;
+        padding-left: 8px;
+        padding-right: 8px;
+        padding-top: 3px;
+        color: #ffffff;
+        padding-bottom: 3px;
+      }
+
+      .success {
+        background-color: #0ead4b;
+      }
+      .error {
+        background-color: #d5150b;
+      }
+      .span-key {
+        margin-right: 10px;
+        font-weight: bold;
+      }
+      .span-value {
+        margin-left: 10px;
+        font-weight: bold;
+      }
+    }
+  }
 }

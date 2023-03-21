@@ -1,7 +1,8 @@
 import request from "../utils/request";
+import { IHomeState } from "../pages/home/home.slice";
 
-export function getNodes () {
-  return request({
+export function getNodes() {
+  return request<IHomeState>({
     url: "/getNodes",
     method: "get",
   });

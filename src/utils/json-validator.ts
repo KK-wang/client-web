@@ -46,8 +46,27 @@ const algorithmReqParamSchema = {
   required: ["algorithm", "tasks", "nodes"],
 };
 
+const podCreateParamSchema = {
+  type: "array",
+  minItems: 1,
+  items: {
+    type: "object",
+    properties: {
+      "podName": { type: "string" },
+      "image": { type: "string" },
+      "nodeName": { type: "string" }
+    },
+    required: ["podName", "image", "nodeName"],
+    additionalProperties: false,
+  }
+}
+
+
 const algorithmReqParamValidator = ajv.compile(algorithmReqParamSchema); 
+
+const podCreateParamValidator = ajv.compile(podCreateParamSchema);
 
 export {
   algorithmReqParamValidator,
+  podCreateParamValidator
 }

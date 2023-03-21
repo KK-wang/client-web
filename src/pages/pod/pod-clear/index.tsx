@@ -3,14 +3,14 @@ import styleNative from "./style.module.scss";
 import convert from "../../../utils/proxy";
 import { DeleteOutlined, QuestionCircleOutlined, ReloadOutlined } from "@ant-design/icons";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { getNodesApi } from "../../home/home.slice";
+import { getNodesApi, IHomeState } from "../../home/home.slice";
 import { useEffect, useRef } from "react";
 import { shallowEqual } from "react-redux";
 import { Graph, Tooltip } from '@antv/g6';
 import ReactDOM from 'react-dom';
 import { getData } from "./graph-data";
 import { Tooltip as TooltipType } from "@antv/g6-plugin";
-import { clearPods } from "../../../api";
+import { clearPods, getNodes } from "../../../api";
 
 
 interface IPod {
@@ -130,12 +130,27 @@ function PodClear() {
     graphRef.current.render();
   }, [getNodesApiData]);
 
+  const getPodNums = (getNodesApiData: IHomeState) => {
+    const getNodesApiDataKeys = Object.keys(getNodesApiData);
+    let podNums = 0;
+    for (const nodeName of getNodesApiDataKeys) {
+      const pods = getNodesApiData[nodeName].pods;
+      podNums += Object.keys(pods).length;
+    }
+    return podNums;
+  };
+
   const clearPodConfirmHandler = async () => {
-    const { data } = await clearPods();
+    const clearPodsRes = await clearPods();
+    while (1) {
+      const { data } = await getNodes();
+      if (getPodNums(data) === 0) break;
+      await new Promise(resolve => setTimeout(resolve, 500));
+    }
     await dispatch(getNodesApi());
-    if (data.clearPodsCode === 200) message.success("清空成功");
+    if (clearPodsRes.data.clearPodsCode === 200) message.success("清空成功");
     else message.success("清空失败");
-    
+    return Promise.resolve();
   }
 
   const loadPodOverview = () => {

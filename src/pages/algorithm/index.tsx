@@ -160,8 +160,8 @@ JSON schema 如下:
   "nodeName": string,
   "cpu": number,
   "mem": number
-}[]
-              `}/>
+}[]`
+              }/>
             </Form.Item>
           </Form>
         </div>
