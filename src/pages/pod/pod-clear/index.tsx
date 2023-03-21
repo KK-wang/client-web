@@ -16,7 +16,7 @@ import { clearPods } from "../../../api";
 interface IPod {
   [podName: string]: {
     image: string,
-    status: boolean,
+    status: number,
     githubUrl: string,
     calcMetrics: string,
   }
@@ -29,13 +29,15 @@ function PodClear() {
   const dispatch = useAppDispatch();
   const graphRef = useRef<Graph | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const oldTooltipRef = useRef<TooltipType | null>(null);
   const podList: IPod = {};
-  let runningPodNums = 0;
+  let creatingPodNums = 0, runningPodNums = 0;
   for (const nodeName of getNodesApiDataKeys) {
     const pods = getNodesApiData[nodeName].pods;
     const podNameList = Object.keys(pods);
     for (const podName of podNameList) {
-      if (pods[podName].status) runningPodNums++;
+      if (pods[podName].status === 0) creatingPodNums++;
+      else if (pods[podName].status === 1) runningPodNums++;
       podList[podName] = pods[podName];
     }
   }
@@ -56,7 +58,7 @@ function PodClear() {
             <li>
               <span class="span-key">状态</span>
               <span>:</span>
-              <span id="tooltip-pod-status-value" class="span-value span-mark">${podList[podName!].status ? "运行" : "完成"}</span>
+              <span id="tooltip-pod-status-value" class="span-value span-mark">${podList[podName!].status === 0 ? "创建中" : podList[podName!].status === 1 ? "运行中" : "已完成"}</span>
             </li>
             <li>
               <span class="span-key">Docker 镜像</span>
@@ -72,7 +74,8 @@ function PodClear() {
             </li>
           </ul>
         `;
-        if (podList[podName!].status) div.querySelector("#tooltip-pod-status-value")?.classList.add("running");
+        if (podList[podName!].status === 0) div.querySelector("#tooltip-pod-status-value")?.classList.add("create")
+        else if (podList[podName!].status === 1) div.querySelector("#tooltip-pod-status-value")?.classList.add("running");
         else div.querySelector("#tooltip-pod-status-value")?.classList.add("finish");
         return div;
       },
@@ -118,16 +121,21 @@ function PodClear() {
         canvas.style.cursor = "grab";
       });
     }
-    if (tooltip !== null) graphRef.current.addPlugin(tooltip);
+    if (tooltip !== null) {
+      if (oldTooltipRef.current !== null) graphRef.current.removePlugin(oldTooltipRef.current);
+      graphRef.current.addPlugin(tooltip);
+      oldTooltipRef.current = tooltip;
+    }
     graphRef.current.data(data);
     graphRef.current.render();
   }, [getNodesApiData]);
 
   const clearPodConfirmHandler = async () => {
     const { data } = await clearPods();
+    await dispatch(getNodesApi());
     if (data.clearPodsCode === 200) message.success("清空成功");
     else message.success("清空失败");
-    dispatch(getNodesApi());
+    
   }
 
   const loadPodOverview = () => {
@@ -139,7 +147,7 @@ function PodClear() {
     <div className={style.podClearWrapper}>
       <Card title={
         <div className={style.cardTitle}>
-          Pod 概览<span style={{marginLeft: "10px", marginRight: "10px"}}>:</span>当前共有 <span className={`${style.spanMark} ${style.info}`}>{Object.keys(podList).length}</span> 个 Pod，其中 <span className={`${style.spanMark} ${style.running}`}>{runningPodNums}</span> 个 Pod 处于 <span className={`${style.spanMark} ${style.running}`}>运行</span> 状态，<span className={`${style.spanMark} ${style.finish}`}>{Object.keys(podList).length - runningPodNums}</span> 个 Pod 处于 <span className={`${style.spanMark} ${style.finish}`}>完成</span> 状态
+          当前共有 <span className={`${style.spanMark} ${style.info}`}>{Object.keys(podList).length}</span> 个 Pod，其中 <span className={`${style.spanMark} ${style.create}`}>{creatingPodNums}</span> 个 Pod 处于 <span className={`${style.spanMark} ${style.create}`}>创建</span> 状态，<span className={`${style.spanMark} ${style.running}`}>{runningPodNums}</span> 个 Pod 处于 <span className={`${style.spanMark} ${style.running}`}>运行</span> 状态，<span className={`${style.spanMark} ${style.finish}`}>{Object.keys(podList).length - runningPodNums - creatingPodNums}</span> 个 Pod 处于 <span className={`${style.spanMark} ${style.finish}`}>完成</span> 状态
         </div>
       } extra={
         <div className={style.extraButtonGroup}>

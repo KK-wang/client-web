@@ -15,7 +15,7 @@ interface IHomeState {
     pods: {
       [podName: string]: {
         image: string,
-        status: boolean,
+        status: number,
         githubUrl: string,
         calcMetrics: string,
       }

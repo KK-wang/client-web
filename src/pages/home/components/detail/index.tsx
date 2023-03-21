@@ -70,7 +70,7 @@ function Detail(prop: DetailProps) {
               null : 
               <span className={style.spanValue}>
                 {
-                  Object.keys(info.pods).length === Object.keys(info.pods).reduce((pre, item) => info.pods[item].status ? pre : pre + 1, 0) ? <span className={`${style.spanMark} ${style.finish}`}>全部完成</span> : <span className={`${style.spanMark} ${style.running}`}>仍有 Pod 执行</span> 
+                  Object.keys(info.pods).length === Object.keys(info.pods).reduce((pre, item) => info.pods[item].status === 2 ? pre + 1 : pre, 0) ? <span className={`${style.spanMark} ${style.finish}`}>全部完成</span> : <span className={`${style.spanMark} ${style.running}`}>仍有 Pod 执行</span> 
                 }
               </span>
           }
@@ -95,7 +95,7 @@ function Detail(prop: DetailProps) {
                         <li>
                           <span className={style.spanKey}>状态</span>
                           <span>:</span>
-                          <span className={style.spanValue}>{info.pods[item].status ? <span className={`${style.spanMark} ${style.running}`}>运行</span> : <span className={`${style.spanMark} ${style.finish}`}>完成</span>}</span>
+                          <span className={style.spanValue}>{info.pods[item].status === 0 ? <span className={`${style.spanMark} ${style.create}`}>创建中</span> : info.pods[item].status === 1 ? <span className={`${style.spanMark} ${style.running}`}>运行中</span> : <span className={`${style.spanMark} ${style.finish}`}>已完成</span>}</span>
                         </li>
                         <li>
                           <span className={style.spanKey}>计算量</span>

@@ -18,11 +18,14 @@
     padding-left: 3px;
     padding-right: 3px;
   }
-  .finish {
-    background-color: #1677ff;
+  .create {
+    background-color: #ea980a;
   }
   .running {
     background-color: #0ead4b;
+  }
+  .finish {
+    background-color: #1677ff;
   }
   .info {
     background-color: #88888b;
@@ -58,6 +61,9 @@
             border-radius: 5px;
             padding-left: 3px;
             padding-right: 3px;
+          }
+          .create {
+            background-color: #ea980a;
           }
           .finish {
             background-color: #1677ff;

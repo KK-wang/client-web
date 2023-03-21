@@ -1,3 +1,4 @@
+export const create: string;
 export const detailWrapper: string;
 export const dockerImage: string;
 export const error: string;

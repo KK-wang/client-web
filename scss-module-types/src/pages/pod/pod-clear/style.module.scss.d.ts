@@ -1,5 +1,6 @@
 export const cardTitle: string;
 export const container: string;
+export const create: string;
 export const extraButtonGroup: string;
 export const finish: string;
 export const info: string;
