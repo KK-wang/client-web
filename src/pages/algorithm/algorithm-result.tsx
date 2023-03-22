@@ -21,7 +21,7 @@ function AlgorithmResult(prop: { algorithmRes: IAlgorithmState[] }) {
     <div className={style.contentJson}>
       <div 
         style={{
-          position: "absolute",
+          position: "fixed",
           top: "40px",
           right: "30px",
           fontSize: "25px",

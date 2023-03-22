@@ -140,9 +140,23 @@
 
     .content-info, .content-loading, .content-json {
       position: relative;
-      min-height: 400px;
-      padding-top: 40px;
-      padding-bottom: 40px;
+      height: 400px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      overflow-x: hidden;
+      overflow-y: auto;
+  
+      &::-webkit-scrollbar {
+        width: 15px;
+      }
+  
+      &::-webkit-scrollbar-thumb {
+        background: #808080;      
+      }
+  
+      &::-webkit-scrollbar-track {
+        background: #c3c0c0;
+      }
     }
 
     .content-info {

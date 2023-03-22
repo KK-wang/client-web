@@ -6,11 +6,14 @@ import json from "highlight.js/lib/languages/json";
 import hljs from "highlight.js";
 import { CopyOutlined } from "@ant-design/icons";
 import { message } from "antd";
+import convert from "../../../../utils/proxy";
+import styleNative from "./style.module.scss";
 
 hljs.registerLanguage("json", json);
 
 function Json(prop: { nodeName: string }) {
   const getAllNodesMetricsData = useContext(Context);
+  const style = convert<typeof styleNative>(styleNative);
   useEffect(() => {
     hljs.highlightAll();
   }, []);
@@ -24,26 +27,28 @@ function Json(prop: { nodeName: string }) {
     }
   }
   return (
-    <div style={{ width: "100%", position: "relative" }}>
+    <div className={style.jsonWrapper}>
       <MacCodeBlock>
-        <div 
-          style={{
-            position: "absolute",
-            top: "40px",
-            right: "30px",
-            fontSize: "25px",
-            cursor: "pointer",
-          }}
-          onClick={() => navigator.clipboard.writeText(JSON.stringify(data, null, 2)).
-          then(() => message.success("已拷贝 Node 均值信息到剪切板"))}
-        ><CopyOutlined/></div>
-        <pre>
-          <code className="language-json" style={{ fontFamily: "ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace" }}>
-            {
-              JSON.stringify(data, null, 2)
-            }
-          </code>
-        </pre>
+        <div className={style.macCodeBlockWrapper}>
+          <div 
+            style={{
+              position: "fixed",
+              top: "40px",
+              right: "30px",
+              fontSize: "25px",
+              cursor: "pointer",
+            }}
+            onClick={() => navigator.clipboard.writeText(JSON.stringify(data, null, 2)).
+            then(() => message.success("已拷贝 Node 均值信息到剪切板"))}
+          ><CopyOutlined/></div>
+          <pre>
+            <code className="language-json" style={{ fontFamily: "ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace" }}>
+              {
+                JSON.stringify(data, null, 2)
+              }
+            </code>
+          </pre>
+        </div>
       </MacCodeBlock>
     </div>
   );

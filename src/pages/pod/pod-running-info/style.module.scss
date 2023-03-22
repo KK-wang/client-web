@@ -1,3 +1,119 @@
 .pod-running-info-wrapper {
   position: relative;
+
+  .tabs-wrapper {
+    position: relative;
+    :global {
+      .ant-tabs-nav {
+        .ant-tabs-nav-wrap {
+          .ant-tabs-nav-list {
+            color: #ffffff;
+            font-weight: bold;
+            .ant-tabs-tab {
+              width: 80px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+            .ant-tabs-tab.ant-tabs-tab-active {
+              background-color: #1677ff;
+              margin-right: 10px;
+              border-radius: 5px;
+              .ant-tabs-tab-btn {
+                color: #ffffff;
+              }
+            }
+          }
+        }
+        .ant-tabs-nav-operations {
+          button {
+            padding-top: 15px;
+            margin-right: 10px;
+          }
+          svg {
+            font-size: 20px;
+            fill: #ffffff;
+          }
+        }
+      }
+    }
+  }
+
+  .skeleton {
+    position: relative;
+    height: 500px;
+    width: 100%;
+
+    .skeleton-content {
+      width: 100%;
+      display: flex;
+
+      :global {
+        .ant-skeleton:first-child {
+          width: 10%;
+        }
+        .ant-skeleton.ant-skeleton-element {
+          width: 88.2%;
+          height: 305px;
+          position: relative;
+          top: 13px;
+          left: 20px;
+          .ant-skeleton-image {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  :global {
+    .ant-card.ant-card-bordered {
+      .ant-card-body {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+    }
+  }
+
+  .extra-button-group {
+    position: relative;
+    button:first-child {
+      margin-right: 20px;
+    }
+    :global {
+      button:where(.css-dev-only-do-not-override-1me4733).ant-btn-primary:disabled {
+        color: rgba(255, 255, 255, 0.25);
+      }
+    }
+  }
+}
+
+:global {
+  :where(.css-dev-only-do-not-override-1me4733).ant-tabs-dropdown .ant-tabs-dropdown-menu-item:hover {
+    color: #1677ff !important;
+  }
+  .ant-tabs-dropdown {
+    border: 3px solid #ffffff;
+    ul {
+      background-color: #4e5576 !important;
+      border-radius: 0 !important;
+      li {
+        color: #ffffff !important;
+        font-weight: bold !important;
+      }
+      &::-webkit-scrollbar {
+        width: 7.5px;
+      }
+  
+      &::-webkit-scrollbar-thumb {
+        background: #808080;      
+      }
+  
+      &::-webkit-scrollbar-track {
+        background: #c3c0c0;
+      }
+    }
+  }
 }

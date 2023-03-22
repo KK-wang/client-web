@@ -1,0 +1,25 @@
+.json-wrapper {
+  position: relative;
+  width: 100%;
+
+  .mac-code-block-wrapper {
+    position: relative;
+    height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+
+    &::-webkit-scrollbar {
+      width: 15px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #808080;      
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #c3c0c0;
+    }
+  }
+}
