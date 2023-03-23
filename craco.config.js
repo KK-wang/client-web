@@ -26,7 +26,7 @@ module.exports = {
           "process.env.API_SERVER_PORT": JSON.stringify(process.env.API_SERVER_PORT),
         }),
         new AutoUploadPlugin({
-          remotePath: "./koa-server",
+          remotePath: "./koa-server/static",
           host: "47.113.144.248",
           username: "root",
           password: "wxh20010320..",
