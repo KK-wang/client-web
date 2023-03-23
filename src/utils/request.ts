@@ -2,9 +2,7 @@ import axios, { AxiosError } from "axios";
 import { message } from "antd";
 
 const request = axios.create({
-  // FIXME: 删除开发时依赖 /koa。
-  // baseURL: `http://${process.env.API_SERVER_HOST}:${process.env.API_SERVER_PORT}`, // 生产环境。
-  baseURL: "/koa", // 开发环境。
+  baseURL: `http://${process.env.API_SERVER_HOST}:${process.env.API_SERVER_PORT}`, // 生产环境。
   timeout: 3000,
 });
 

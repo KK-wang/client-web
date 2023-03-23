@@ -20,5 +20,6 @@ export function getAllPodsRunningInfo() {
   return request<PodType.PodRunningInfo | PodType.PodUnfinished>({
     url: "/getAllPodsRunningInfo",
     method: "get",
+    timeout: Number.MAX_VALUE,
   })
 }

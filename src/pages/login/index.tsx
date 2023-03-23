@@ -11,9 +11,8 @@ import icon from "../../assets/img/icon.png";
 export function Login() {
   // 需要注意的是，React 组件的名称应当以大写字母开头。
   const style = convert<typeof styleNative>(styleNative);
-  // FIXME: 修改默认值。
-  const [username, setUsername] = useState<string>("csu_admin");
-  const [password, setPassword] = useState<string>("8209190414");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
 
   async function submit(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {

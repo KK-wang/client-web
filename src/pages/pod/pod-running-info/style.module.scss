@@ -3,14 +3,14 @@
 
   .tabs-wrapper {
     position: relative;
+    width: 100%;
     :global {
       .ant-tabs-nav {
         .ant-tabs-nav-wrap {
           .ant-tabs-nav-list {
             color: #ffffff;
-            font-weight: bold;
             .ant-tabs-tab {
-              width: 80px;
+              width: 100px;
               display: flex;
               justify-content: center;
               align-items: center;
@@ -37,6 +37,38 @@
         }
       }
     }
+
+    .pod-tabs-wrapper {
+      position: relative;
+      :global {
+        .ant-tabs-nav {
+          &::before {
+            display: none;
+          }
+          .ant-tabs-nav-wrap {
+            .ant-tabs-nav-list {
+              .ant-tabs-tab {
+                width: 130px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                &:nth-child(2) {
+                  margin-left: 20px;
+                }
+              }
+              .ant-tabs-tab.ant-tabs-tab-active {
+                margin-right: 0;
+              }
+              .ant-tabs-ink-bar.ant-tabs-ink-bar-animated {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    
   }
 
   .skeleton {
@@ -101,7 +133,6 @@
       border-radius: 0 !important;
       li {
         color: #ffffff !important;
-        font-weight: bold !important;
       }
       &::-webkit-scrollbar {
         width: 7.5px;

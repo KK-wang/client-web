@@ -27,7 +27,11 @@ function Algorithm() {
   const nodesInfoRef = useRef<string>();
     
   useEffect(() => () => {
-    for (const row of tableData) row.isChecked = false;
+    for (const row of tableData) {
+      row.isChecked = false;
+      row.nums = null;
+      row.podName = null;
+    }
   }, []);
 
   return (
@@ -38,7 +42,8 @@ function Algorithm() {
           <Button
             type="primary" 
             icon={<CloudUploadOutlined />} 
-            size="middle" 
+            size="middle"
+            disabled={isCalculating}
             onClick={async () => {
               try { formDataRef.current.nodes = JSON.parse(nodesInfoRef.current!) }
               catch { message.error("Node 信息的值含有 JSON 语法错误"); return; }

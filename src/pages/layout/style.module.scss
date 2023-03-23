@@ -5,6 +5,18 @@
   overflow-y: auto;
   overflow-x: hidden;
 
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #808080;      
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #c3c0c0;
+  }
+
   .main-content {
     margin-left: 17.5%;
     padding-left: 1.25%;

@@ -45,7 +45,6 @@ function getOption(tag: string, info: INodeState): EChartsOption {
     yAxis: [
       {
         type: 'value',
-        min: val => val.min / 2,
         max: val => val.max * 1.5,
       }
     ]

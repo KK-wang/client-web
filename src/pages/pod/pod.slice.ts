@@ -20,9 +20,10 @@ const podSlice = createSlice({
 const { reset, setFetchPodRunningInfo } = podSlice.actions;
 const pod = podSlice.reducer;
 
-const getAllPodsRunningInfoApi = createAsyncThunk("pod/getAllPodsRunningInfo", async (_, { dispatch }) => {
+const getAllPodsRunningInfoApi = createAsyncThunk("pod/getAllPodsRunningInfo", async (_, { dispatch, rejectWithValue  }) => {
   const res = await getAllPodsRunningInfo();
-  dispatch(reset(res.data));
+  if (res.data.status && res.data.status === 299) return rejectWithValue(res.data.status);
+  else dispatch(reset(res.data));
 });
 
 export {
