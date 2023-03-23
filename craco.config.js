@@ -27,9 +27,9 @@ module.exports = {
         }),
         new AutoUploadPlugin({
           remotePath: "./koa-server/static",
-          host: "47.113.144.248",
+          host: "39.96.212.224",
           username: "root",
-          password: "wxh20010320..",
+          password: "nydus,1234",
         }),
       ],
     },
