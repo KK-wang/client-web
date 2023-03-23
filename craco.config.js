@@ -2,6 +2,8 @@ const dotenv = require("dotenv");
 const { DefinePlugin } = require("webpack");
 dotenv.config();
 const CracoLessPlugin = require('craco-less');
+const AutoUploadPlugin = require('./AutoUploadPlugin');
+
 
 module.exports = {
   devServer: {
@@ -22,7 +24,13 @@ module.exports = {
         new DefinePlugin({
           "process.env.API_SERVER_HOST": JSON.stringify(process.env.API_SERVER_HOST),
           "process.env.API_SERVER_PORT": JSON.stringify(process.env.API_SERVER_PORT),
-        })
+        }),
+        new AutoUploadPlugin({
+          remotePath: "./koa-server",
+          host: "47.113.144.248",
+          username: "root",
+          password: "wxh20010320..",
+        }),
       ],
     },
     configure: (config) => {
