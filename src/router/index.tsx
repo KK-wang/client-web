@@ -10,7 +10,7 @@ import Algorithm from "../pages/algorithm";
 const routesConfig: RouteObject[] = [
   {
     path: "/",
-    element: localStorage.getItem("token") ? <Layout /> : <Navigate to="/login" />,
+    element: localStorage.getItem("token") ? <Layout /> : <Navigate to="/token" />,
     children: [
       {
         path: "/",
@@ -31,7 +31,7 @@ const routesConfig: RouteObject[] = [
     ]
   },
   {
-    path: "/login",
+    path: "/token",
     element: <Login />
   }
 ];

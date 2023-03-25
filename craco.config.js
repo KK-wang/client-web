@@ -1,7 +1,6 @@
 const dotenv = require("dotenv");
 const { DefinePlugin } = require("webpack");
 dotenv.config();
-const CracoLessPlugin = require('craco-less');
 const AutoUploadPlugin = require('./AutoUploadPlugin');
 
 
@@ -38,17 +37,4 @@ module.exports = {
       return {...config, ignoreWarnings};
     },
   },
-  plugins: [
-    {
-      plugin: CracoLessPlugin,
-      options: {
-        lessLoaderOptions: {
-          lessOptions: {
-            modifyVars: { '@primary-color': '#03e9f4' },
-            javascriptEnabled: true,
-          },
-        },
-      },
-    },
-  ]
 }

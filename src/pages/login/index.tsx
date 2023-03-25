@@ -17,9 +17,9 @@ export function Login() {
 
   async function submit(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     e.preventDefault();
-    message.info("登陆中...")
+    message.info("登陆中...");
     token(username, password).then((res: AxiosResponse<{id: number, name: String, token: string}>) => {
-      message.success("登陆成功", 1, () => navigate("/"));
+      message.success("登陆成功", 1, () => window.open(`http://${process.env.API_SERVER_HOST}:${process.env.API_SERVER_PORT}`, "_self"));
       localStorage.setItem("token", res.data.token);
     })
   }
