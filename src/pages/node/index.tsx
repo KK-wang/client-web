@@ -10,6 +10,7 @@ import { AlgorithmReqParam } from "../algorithm/algorithm.slice";
 import node from "../../assets/img/node.png";
 import Chart from "./components/chart";
 import Json from "./components/json";
+import copy from "../../utils/copy";
 
 export const Context = createContext<INodeState>({});
 
@@ -97,7 +98,7 @@ function Node() {
                 mem: getAllNodesMetricsData[key].availableMem.average,
               });
             }
-            navigator.clipboard.writeText(JSON.stringify(info, null, 2)).
+            copy(JSON.stringify(info, null, 2)).
               then(() => message.success("已拷贝 Node 均值信息到剪切板"))
           }}
         >

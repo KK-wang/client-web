@@ -7,6 +7,7 @@ import styleNative from "./style.module.scss";
 import { CopyOutlined } from "@ant-design/icons";
 import { message } from "antd";
 import { IAlgorithmState } from "./algorithm.slice";
+import copy from "../../utils/copy";
 
 hljs.registerLanguage("json", json);
 
@@ -27,7 +28,7 @@ function AlgorithmResult(prop: { algorithmRes: IAlgorithmState[] }) {
           fontSize: "25px",
           cursor: "pointer",
         }}
-        onClick={() => navigator.clipboard.writeText(JSON.stringify(algorithmRes, null, 2)).
+        onClick={() => copy(JSON.stringify(algorithmRes, null, 2)).
         then(() => message.success("已拷贝算法执行结果到剪切板"))}
       ><CopyOutlined/></div>
       <pre>

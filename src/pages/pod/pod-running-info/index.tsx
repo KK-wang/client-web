@@ -8,6 +8,7 @@ import { shallowEqual } from "react-redux";
 import Line from "./chart/line";
 import Column from "./chart/column";
 import { createContext } from "react";
+import copy from "../../../utils/copy";
 
 export const Context = createContext<PodType.PodRunningInfo>({});
 
@@ -44,7 +45,7 @@ function PodRunningInfo() {
         memUsageAvg: podRunningInfo[key].memUsage.average,
       };
     }
-    navigator.clipboard.writeText(JSON.stringify(info, null, 2)).
+    copy(JSON.stringify(info, null, 2)).
       then(() => message.success("已拷贝所有 Pod 的运行概览信息到剪切板"))
   }
 

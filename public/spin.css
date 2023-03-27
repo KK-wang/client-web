@@ -1,3 +1,8 @@
+#csu-design-copy-input-textarea-element {
+  position: absolute;
+  left: -9999px;
+}
+
 #spin {
   position: absolute;
   top: 50%;
