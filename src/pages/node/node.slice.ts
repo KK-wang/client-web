@@ -44,7 +44,10 @@ const node = nodeSlice.reducer;
 
 const getAllNodesMetricsApi = createAsyncThunk("node/getAllNodesMetrics", async (_, { dispatch }) => {
   const res = await getAllNodesMetrics();
-  dispatch(reset(res.data));
+  const keyArr = Object.keys(res.data).sort();
+  const sorted = {} as INodeState;
+  keyArr.forEach(key => sorted[key] = res.data[key]);
+  dispatch(reset(sorted));
 });
 
 export {

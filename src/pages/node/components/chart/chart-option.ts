@@ -65,7 +65,7 @@ function getOption(tag: string, info: INodeState): EChartsOption {
     }
   }
   advancedConfig.color = colorArr;
-  advancedConfig.legend = { data: infoKeys.sort((a, b) => a.localeCompare(b)) };
+  advancedConfig.legend = { data: infoKeys };
   advancedConfig.series = [];
   for (const key of infoKeys) {
     advancedConfig.series.push({
