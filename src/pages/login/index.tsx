@@ -19,7 +19,7 @@ export function Login() {
     e.preventDefault();
     message.info("登陆中...");
     token(username, password).then((res: AxiosResponse<{id: number, name: String, token: string}>) => {
-      message.success("登陆成功", 1, () => window.open(`http://${process.env.API_SERVER_HOST}:${process.env.API_SERVER_PORT}`, "_self"));
+      message.success("登陆成功", 1, () => process.env.BASE_URL === "/koa" ? window.open("http://localhost:3000", "_self") : window.open(`${process.env.BASE_URL}`, "_self"));
       localStorage.setItem("token", res.data.token);
     })
   }

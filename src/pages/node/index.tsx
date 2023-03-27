@@ -25,8 +25,9 @@ function Node() {
   });
   const getAllNodesMetricsDataKeys = Object.keys(getAllNodesMetricsData);
   useEffect(() => {
-    if (getAllNodesMetricsDataKeys.length === 0) {
+    if (getAllNodesMetricsDataKeys.length === 0 && !loading) {
       loadNodeInfo();
+      dispatch(setLoading(true));
     }
   }, []);
 
@@ -113,7 +114,7 @@ function Node() {
       </div>
       {
         ["node00", "others"].map(item => (
-          loading ? (
+          loading || getAllNodesMetricsDataKeys.length === 0 ? (
             <div className={style.firstLoadingSkeleton} key={item}>
               <Skeleton active title={false} paragraph={{rows: 3, width: "100%"}}/>
               <Skeleton.Node active>

@@ -45,7 +45,8 @@ function getOption(tag: string, info: INodeState): EChartsOption {
     yAxis: [
       {
         type: 'value',
-        max: val => val.max * 1.5,
+        max: val => val.max,
+        min: val => val.min,
       }
     ]
   };
@@ -63,33 +64,17 @@ function getOption(tag: string, info: INodeState): EChartsOption {
       averages[key] = info[key].availableMem.average;
     }
   }
-  advancedConfig.color = colorArr.slice(0, infoKeys.length);
-  advancedConfig.legend = { data: infoKeys };
+  advancedConfig.color = colorArr;
+  advancedConfig.legend = { data: infoKeys.sort((a, b) => a.localeCompare(b)) };
   advancedConfig.series = [];
   for (const key of infoKeys) {
     advancedConfig.series.push({
       name: key,
       type: 'line',
-      stack: 'Total',
-      areaStyle: {},
       emphasis: {
         focus: 'series'
       },
       data: data[key],
-      markLine: {
-        data: [
-          {
-            type: "average",
-            label: {
-              position: "middle",
-            },
-            lineStyle: {
-              color: "#d5150b",
-              width: 4,
-            },
-          }
-        ]
-      }
     });
   }
 

@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import { message } from "antd";
 
 const request = axios.create({
-  baseURL: `http://${process.env.API_SERVER_HOST}:${process.env.API_SERVER_PORT}`, // 生产环境。
+  baseURL: `${process.env.BASE_URL}`,
   timeout: 3000,
 });
 

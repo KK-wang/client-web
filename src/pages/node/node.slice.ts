@@ -27,7 +27,7 @@ const nodeSlice = createSlice({
   name: "node",
   initialState: {
     getAllNodesMetricsData: {} as INodeState,
-    loading: true,
+    loading: false,
   },
   reducers: {
     reset(state, action) {

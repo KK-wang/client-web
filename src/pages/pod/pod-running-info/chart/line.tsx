@@ -117,7 +117,6 @@ function getOption(tag: string, info: PodRunningInfoValue): EChartsOption {
       {
         name: `${ Object.keys(info)[0] } 的 ${tag === "cpu" ? "CPU " : "内存"}使用情况`,
         type: 'line',
-        stack: 'Total',
         areaStyle: {},
         emphasis: {
           focus: 'series'
