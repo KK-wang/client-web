@@ -36,12 +36,12 @@ function Node() {
     {
       key: 0,
       href: `#node00`,
-      title: "node00 的 CPU 及内存使用情况",
+      title: "node00 的 CPU 及内存可用情况",
     },
     {
       key: 1,
       href: `#others`,
-      title: "其他节点的 CPU 及内存使用情况",
+      title: "其他节点的 CPU 及内存可用情况",
     }
   ];
 
@@ -60,11 +60,11 @@ function Node() {
   const tabList = [
     {
       key: "cpu",
-      tab: "CPU 占用图表",
+      tab: "CPU 资源可用图表",
     },
     {
       key: "mem",
-      tab: "内存占用图表",
+      tab: "内存资源可用图表",
     },
     {
       key: "json",
@@ -138,7 +138,7 @@ function Node() {
                 extra={
                   <div id={item} className={style.extraTitle}>
                     <img width={45} src={node} alt="" />
-                    <span>{item === "node00" ? "node00 " : "其他节点" }的 CPU 及内存使用情况</span>
+                    <span>{item === "node00" ? "node00 " : "其他节点" }的 CPU 及内存可用情况</span>
                   </div>}
               >
                 <Context.Provider value={getAllNodesMetricsData}>{cardContentList(item)}</Context.Provider>
