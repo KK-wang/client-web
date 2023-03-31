@@ -14,7 +14,8 @@ request.interceptors.request.use(config => {
 
 request.interceptors.response.use(res => res, (err: AxiosError) => {
   // 服务端响应非 2XX。
-  message.error(`${err.response?.status}: ${err.response?.data}`);
+  console.log(err);
+  message.error("服务端响应有误，请查看控制台输出");
   return Promise.reject();
 });
 

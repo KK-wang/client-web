@@ -102,6 +102,9 @@ function getOption(customKey: string, info : { [podName: string]: {
       {
         type: 'value',
         max: val => val.max * 1.5,
+        axisLabel: {
+          formatter: (val: number) => val.toFixed(2)
+        }
       }
     ],
     xAxis: [
@@ -171,11 +174,14 @@ function getOption(customKey: string, info : { [podName: string]: {
         name: 'CPU 使用情况（均值）',
         position: 'left',
         alignTicks: true,
+        axisLabel: {
+          formatter: (val: number) => val.toFixed(2)
+        },
         axisLine: {
           show: true,
           lineStyle: {
             color: '#5470C6'
-          }
+          },
         },
         max: val => val.max * 1.5,
       },

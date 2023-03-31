@@ -47,6 +47,9 @@ function getOption(tag: string, info: INodeState): EChartsOption {
         type: 'value',
         max: val => val.max,
         min: val => val.min,
+        axisLabel: {
+          formatter: (val: number) => val.toFixed(2)
+        }
       }
     ]
   };

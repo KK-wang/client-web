@@ -97,6 +97,9 @@ function getOption(tag: string, customKey: string, info: PodRunningInfoValue): E
       {
         type: 'value',
         max: val => val.max * 1.5,
+        axisLabel: {
+          formatter: (val: number) => val.toFixed(2)
+        }
       }
     ],
   };
