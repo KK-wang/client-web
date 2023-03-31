@@ -51,7 +51,7 @@ function Line(prop: { customKey: string, tag: string }) {
     if (chartsRef.current === null) {
       chartsRef.current = echarts.init(ReactDOM.findDOMNode(containerRef.current) as HTMLElement, "dark");
     }
-    chartsRef.current.setOption(getOption(tag, info));
+    chartsRef.current.setOption(getOption(tag, customKey, info));
   }, [customKey, tag]);
 
 
@@ -65,11 +65,11 @@ function Line(prop: { customKey: string, tag: string }) {
   );
 }
 
-function getOption(tag: string, info: PodRunningInfoValue): EChartsOption {
+function getOption(tag: string, customKey: string, info: PodRunningInfoValue): EChartsOption {
   // tag === "cpu" or "mem"
   const baseCOnfig: EChartsOption = {
     title: {
-      text: `${ Object.keys(info)[0] } 的 ${tag === "cpu" ? "CPU " : "内存"}使用情况`,
+      text: `${ customKey } ${tag === "cpu" ? "的 CPU " : "的内存"}使用情况`,
       top: "10px",
       left: "center",
     },
@@ -115,7 +115,7 @@ function getOption(tag: string, info: PodRunningInfoValue): EChartsOption {
     ],
     series: [
       {
-        name: `${ Object.keys(info)[0] } 的 ${tag === "cpu" ? "CPU " : "内存"}使用情况`,
+        name: `${ customKey } ${tag === "cpu" ? "的 CPU " : "的内存"}使用情况`,
         type: 'line',
         areaStyle: {},
         emphasis: {
