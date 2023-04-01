@@ -107,7 +107,7 @@ function getOption(tag: string, customKey: string, info: PodRunningInfoValue): E
   const data = tag === "cpu" ? info.cpuUsage : info.memUsage;
   const keyWithoutAvg = Object.keys(data).slice(0, -1).map(item => parseInt(item));
   const valueWithoutAvg = [];
-  for (const key of keyWithoutAvg) valueWithoutAvg.push(data[key]);
+  for (const key of keyWithoutAvg) valueWithoutAvg.push(data[key].toFixed(2));
   const advancedConfig: EChartsOption = {
     xAxis: [
       {

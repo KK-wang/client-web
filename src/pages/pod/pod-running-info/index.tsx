@@ -40,9 +40,9 @@ function PodRunningInfo() {
     } } = {};
     for (const key of podRunningInfoKeys) {
       info[key] = {
-        runningTime: podRunningInfo[key].runningTime,
-        cpuUsageAvg: podRunningInfo[key].cpuUsage.average,
-        memUsageAvg: podRunningInfo[key].memUsage.average,
+        runningTime: parseFloat(podRunningInfo[key].runningTime.toFixed(2)),
+        cpuUsageAvg: parseFloat(podRunningInfo[key].cpuUsage.average.toFixed(2)),
+        memUsageAvg: parseFloat(podRunningInfo[key].memUsage.average.toFixed(2)),
       };
     }
     copy(JSON.stringify(info, null, 2)).

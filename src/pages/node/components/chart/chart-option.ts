@@ -56,16 +56,12 @@ function getOption(tag: string, info: INodeState): EChartsOption {
   const colorArr = ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'];
   const advancedConfig: EChartsOption = {};
   const infoKeys = Object.keys(info);
-  const data: { [nodeName: string]: number[] } = {};
-  const averages: { [nodeName: string]: number } = {};
+  const data: { [nodeName: string]: string[] } = {};
   for (const key of infoKeys) {
-    if (tag === "cpu") {
-      data[key] = Object.values(info[key].idleCPU).map(item => item * info[key].numsCPU).slice(0, 5);
-      averages[key] = info[key].idleCPU.average * info[key].numsCPU;
-    } else {
-      data[key] = Object.values(info[key].availableMem).slice(0, 5);
-      averages[key] = info[key].availableMem.average;
-    }
+    if (tag === "cpu")
+      data[key] = Object.values(info[key].idleCPU).map(item => (item * info[key].numsCPU).toFixed(2)).slice(0, 5);
+    else 
+      data[key] = Object.values(info[key].availableMem).map(item => item.toFixed(2)).slice(0, 5);
   }
   advancedConfig.color = colorArr;
   advancedConfig.legend = { data: infoKeys };

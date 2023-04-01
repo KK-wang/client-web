@@ -121,7 +121,7 @@ function getOption(customKey: string, info : { [podName: string]: {
         name: "运行时间",
         type: 'bar',
         barWidth: '60%',
-        data: Object.values(info).map(item => item.runningTime),
+        data: Object.values(info).map(item => item.runningTime.toFixed(2)),
         markLine: {
           data: [
             {
@@ -203,7 +203,7 @@ function getOption(customKey: string, info : { [podName: string]: {
       {
         name: 'CPU 使用情况（均值）',
         type: 'bar',
-        data: Object.values(info).map(item => item.cpuUsageAvg),
+        data: Object.values(info).map(item => item.cpuUsageAvg.toFixed(2)),
         markLine: {
           data: [
             { 
@@ -222,7 +222,7 @@ function getOption(customKey: string, info : { [podName: string]: {
         name: '内存使用情况（均值）',
         type: 'bar',
         yAxisIndex: 1,
-        data: Object.values(info).map(item => item.memUsageAvg),
+        data: Object.values(info).map(item => item.memUsageAvg.toFixed(2)),
         markLine: {
           data: [
             { 

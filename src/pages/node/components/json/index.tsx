@@ -40,7 +40,7 @@ function Json(prop: { nodeName: string }) {
               cursor: "pointer",
             }}
             onClick={() => copy(JSON.stringify(data, null, 2)).
-            then(() => message.success("已拷贝 Node 均值信息到剪切板"))}
+                then(() => message.success("已拷贝 Node 均值信息到剪切板"))}
           ><CopyOutlined/></div>
           <pre>
             <code className="language-json" style={{ fontFamily: "ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace" }}>

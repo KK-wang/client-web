@@ -94,8 +94,8 @@ function Node() {
             for (const key of getAllNodesMetricsDataKeys) {
               info.push({
                 nodeName: key,
-                cpu: getAllNodesMetricsData[key].numsCPU * getAllNodesMetricsData[key].idleCPU.average,
-                mem: getAllNodesMetricsData[key].availableMem.average,
+                cpu: parseFloat((getAllNodesMetricsData[key].numsCPU * getAllNodesMetricsData[key].idleCPU.average).toFixed(2)),
+                mem: parseFloat((getAllNodesMetricsData[key].availableMem.average).toFixed(2)),
               });
             }
             copy(JSON.stringify(info, null, 2)).
