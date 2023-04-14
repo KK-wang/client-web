@@ -139,7 +139,7 @@ function Algorithm() {
                           tasks.push({
                             image: dataSource[row.key].image,
                             calcMetrics: dataSource[row.key].calcMetrics,
-                            podName: dataSource[row.key].podName,
+                            podName: `${dataSource[row.key].image}-${dataSource[row.key].podName}-{i}`,
                             nums: dataSource[row.key].nums,
                           });
                         } else {
