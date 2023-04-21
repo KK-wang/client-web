@@ -23,6 +23,7 @@ const pod = podSlice.reducer;
 const getAllPodsRunningInfoApi = createAsyncThunk("pod/getAllPodsRunningInfo", async (_, { dispatch, rejectWithValue  }) => {
   const res = await getAllPodsRunningInfo();
   if (res.data.status && res.data.status === 299) return rejectWithValue(res.data.status);
+  else if (Object.keys(res.data).length === 0) return rejectWithValue(0);
   else {
     const keyArr = Object.keys(res.data).sort();
     const sorted = {} as PodType.PodRunningInfo;

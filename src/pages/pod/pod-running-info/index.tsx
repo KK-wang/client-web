@@ -27,6 +27,10 @@ function PodRunningInfo() {
       message.error("还有 Pod 处于未完成状态");
       dispatch(setFetchPodRunningInfo(false));
       return;
+    } else if (res.payload === 0) {
+      message.error("集群中目前没有 Pod 任务");
+      dispatch(setFetchPodRunningInfo(false));
+      return;
     }
     dispatch(setFetchPodRunningInfo(false));
     message.success("所有 Pod 的运行信息获取成功");
