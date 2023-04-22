@@ -6,7 +6,7 @@ const algorithmReqParamSchema = {
   type: "object",
   properties: {
     "algorithm": {
-      enum: ["BBO", "GA"],
+      enum: ["BBO-Pro", "GA", "BBO"],
     },
     "tasks": {
       type: "array",
