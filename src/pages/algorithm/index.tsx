@@ -11,6 +11,7 @@ import JsonEditor from "../../common/json-editor";
 import { algorithmReqParamValidator as validator } from "../../utils/json-validator";
 import MacCodeBlock from "../../common/mac-code-block";
 import AlgorithmResult from "./algorithm-result";
+import copy from "../../utils/copy";
 
 
 function Algorithm() {
@@ -30,7 +31,6 @@ function Algorithm() {
     for (const row of tableData) {
       row.isChecked = false;
       row.nums = null;
-      row.podName = null;
     }
   }, []);
 
@@ -116,16 +116,19 @@ function Algorithm() {
                       title: () => <Popover content={<div style={{maxWidth: "200px"}}>后台会自动将 podName 编号以保证 podName 的唯一性</div>}><span style={{cursor: "default"}}>pod 名称<InfoCircleOutlined style={{marginLeft: "10px"}}/></span></Popover>,
                       dataIndex: "podName",
                       render(_, record: ITableData) {
-                        return <Input value={record.podName === null ? "" : record.podName} disabled={!record.isChecked} style={{ width: "auto", minWidth: "150px", textAlign: "center" }} addonBefore={`${record.image}-`} addonAfter="-{i}" onChange={e => {
-                          for (const row of dataSource)
-                            if (row.image === record.image)
-                              row.podName = e.target.value;
-                          const tasks = formDataRef.current.tasks;
-                          for (const task of tasks) 
-                            if (task.image === record.image)
-                              task.podName = `${record.image}-${e.target.value}-{i}`;
-                          setDataSource([...dataSource])
-                        }}/>;
+                        return (
+                          <div style={{ 
+                              width: "auto", 
+                              fontWeight: "bold",
+                              fontSize: "17px",
+                              height: "31.6px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }} >
+                            {record.image}-{"{i}"}
+                          </div>
+                        )
                       }
                     },
                   ]}
@@ -139,13 +142,12 @@ function Algorithm() {
                           tasks.push({
                             image: dataSource[row.key].image,
                             calcMetrics: dataSource[row.key].calcMetrics,
-                            podName: `${dataSource[row.key].image}-${dataSource[row.key].podName}-{i}`,
+                            podName: `${dataSource[row.key].image}-{i}`,
                             nums: dataSource[row.key].nums,
                           });
                         } else {
                           row.isChecked = false;
                           row.nums = null;
-                          row.podName = null;
                         }
                       }
                       formDataRef.current.tasks = tasks;
@@ -174,7 +176,13 @@ JSON schema 如下:
       <Card 
         title="算法执行结果"
         extra={
-          <Button type="primary" icon={<CopyOutlined />} size="middle">
+          <Button 
+            type="primary" 
+            icon={<CopyOutlined />} size="middle"
+            onClick={
+              () => copy(JSON.stringify(algorithmRes, null, 2)).
+                then(() => message.success("已拷贝算法执行结果到剪切板"))
+          }>
             复制算法执行结果
           </Button>
         }>

@@ -21,7 +21,6 @@ const tableData: ITableData[] = [
     githubUrl: "https://github.com/KK-wang/ai-task/blob/master/various-task/Dockerfile.5s",
     isChecked: false,
     nums: null,
-    podName: null,
   },
   {
     key: 1,
@@ -30,7 +29,6 @@ const tableData: ITableData[] = [
     githubUrl: "https://github.com/KK-wang/ai-task/blob/master/various-task/Dockerfile.7s",
     isChecked: false,
     nums: null,
-    podName: null,
   },
   {
     key: 2,
@@ -39,7 +37,6 @@ const tableData: ITableData[] = [
     githubUrl: "https://github.com/KK-wang/ai-task/blob/master/various-task/Dockerfile.9s",
     isChecked: false,
     nums: null,
-    podName: null,
   },
   {
     key: 3,
@@ -48,7 +45,6 @@ const tableData: ITableData[] = [
     githubUrl: "https://github.com/KK-wang/ai-task/blob/master/various-task/Dockerfile.11s",
     isChecked: false,
     nums: null,
-    podName: null,
   },
   {
     key: 4,
@@ -57,7 +53,6 @@ const tableData: ITableData[] = [
     githubUrl: "https://github.com/KK-wang/ai-task/blob/master/various-task/Dockerfile.13s",
     isChecked: false,
     nums: null,
-    podName: null,
   },
   {
     key: 5,
@@ -66,7 +61,6 @@ const tableData: ITableData[] = [
     githubUrl: "https://github.com/KK-wang/ai-task/blob/master/various-task/Dockerfile.15s",
     isChecked: false,
     nums: null,
-    podName: null,
   },
 ];
 
@@ -83,5 +77,4 @@ interface ITableData {
   githubUrl: string,
   isChecked: boolean,
   nums: number | null,
-  podName: string | null,
 }
