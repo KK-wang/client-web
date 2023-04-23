@@ -13,11 +13,14 @@ const podSlice = createSlice({
     },
     setFetchPodRunningInfo(state, action) {
       state.isFetchPodRunningInfo = action.payload;
-    }
+    },
+    clearPod(state) {
+      state.podRunningInfo = {}
+    },
   }
 });
 
-const { reset, setFetchPodRunningInfo } = podSlice.actions;
+const { reset, setFetchPodRunningInfo, clearPod } = podSlice.actions;
 const pod = podSlice.reducer;
 
 const getAllPodsRunningInfoApi = createAsyncThunk("pod/getAllPodsRunningInfo", async (_, { dispatch, rejectWithValue  }) => {
@@ -37,6 +40,7 @@ export {
   pod,
   getAllPodsRunningInfoApi,
   setFetchPodRunningInfo,
+  clearPod,
 };
 
 namespace PodType {

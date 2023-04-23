@@ -11,6 +11,8 @@ import ReactDOM from 'react-dom';
 import { getData } from "./graph-data";
 import { Tooltip as TooltipType } from "@antv/g6-plugin";
 import { clearPods, getNodes } from "../../../api";
+import { clearPod } from "../pod.slice";
+
 
 
 interface IPod {
@@ -148,7 +150,10 @@ function PodClear() {
       await new Promise(resolve => setTimeout(resolve, 500));
     }
     await dispatch(getNodesApi());
-    if (clearPodsRes.data.clearPodsCode === 200) message.success("清空成功");
+    if (clearPodsRes.data.clearPodsCode === 200) {
+      message.success("清空成功");
+      dispatch(clearPod())
+    }
     else message.success("清空失败");
     return Promise.resolve();
   }
