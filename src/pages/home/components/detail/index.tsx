@@ -90,7 +90,7 @@ function Detail(prop: DetailProps) {
                         <li>
                           <span className={style.spanKey}>Docker 镜像</span>
                           <span>:</span>
-                          <span className={`${style.spanValue} ${style.spanMark} ${style.dockerImage}`} style={{ fontWeight: "bold" }} onClick={() => window.open(info.pods[item].githubUrl, "target")}><GithubOutlined /> {info.pods[item].image}</span>
+                          <span className={`${style.spanValue} ${style.spanMark} ${style.dockerImage}`} style={{ fontWeight: "bold" }} onClick={() => window.open(info.pods[item].githubUrl, Date.now().toString())}><GithubOutlined /> {info.pods[item].image}</span>
                         </li>
                         <li>
                           <span className={style.spanKey}>状态</span>
