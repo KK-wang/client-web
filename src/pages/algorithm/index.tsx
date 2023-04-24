@@ -179,6 +179,7 @@ JSON schema 如下:
           <Button 
             type="primary" 
             icon={<CopyOutlined />} size="middle"
+            disabled={algorithmRes.length === 0}
             onClick={
               () => copy(JSON.stringify(algorithmRes, null, 2)).
                 then(() => message.success("已拷贝算法执行结果到剪切板"))
